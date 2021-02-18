@@ -1,5 +1,6 @@
 package com.example.academy_proj2_githubapp.search.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
 import javax.inject.Inject
 
@@ -23,9 +23,14 @@ class SearchFragment : Fragment() {
     private val binding get() = requireNotNull(_binding)
 
     @Inject
-    private lateinit var searchViewModel: SearchViewModel
+    lateinit var searchViewModel: SearchViewModel
 
     private lateinit var searchAdapter: SearchAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as AppApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,22 +68,19 @@ class SearchFragment : Fragment() {
         binding.rvSearchResults.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = searchAdapter
-
-            val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
-            addItemDecoration(decoration)
         }
     }
 
     private fun showSearchResults(viewState: SearchViewState) {
         when (viewState) {
             is SearchViewState.SearchLoading -> {
-                binding.rvSearchResults.visibility = View.GONE
+                binding.pbSearchLoading.visibility = View.VISIBLE
             }
             is SearchViewState.SearchFailed -> {
                 Toast.makeText(context, viewState.error, Toast.LENGTH_LONG).show()
             }
             is SearchViewState.SearchSuccess -> {
-                binding.rvSearchResults.visibility = View.VISIBLE
+                binding.pbSearchLoading.visibility = View.GONE
                 searchAdapter.submitList(viewState.data)
             }
 

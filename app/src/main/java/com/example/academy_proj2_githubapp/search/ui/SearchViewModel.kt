@@ -19,7 +19,7 @@ class SearchViewModel @Inject constructor(
 
     companion object {
         private const val SEARCH_PAGES = 1
-        private const val USERS_PER_PAGE = 15
+        private const val USERS_PER_PAGE = 70
     }
 
     val viewState = MutableLiveData<SearchViewState>()
@@ -30,11 +30,10 @@ class SearchViewModel @Inject constructor(
         val asyncOperation =
             multithreading.async<Result<UsersSearchResponseData, UsersSearchErrors>> {
                 val users = searchService.searchUsers(keyword, USERS_PER_PAGE, SEARCH_PAGES)
-                    .execute().body() ?: return@async Result.error(UsersSearchErrors.USERS_NOT_LOADED)
-
+                    .execute().body()
+                    ?: return@async Result.error(UsersSearchErrors.USERS_NOT_LOADED)
                 return@async Result.success(users)
             }
-
         asyncOperation
             .map(usersSearchMapper::map)
             .postOnMainThread(::showResult)

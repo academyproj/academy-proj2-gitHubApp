@@ -11,5 +11,6 @@ interface SearchUsersService {
     fun searchUsers(
         @Query("q") searchKeyword: String,
         @Query("per_page") per_page: Int,
-        @Query("page") page: Int) : Call<UsersSearchResponseData>
+        @Query("page") page: Int
+    ): Call<UsersSearchResponseData>
 }

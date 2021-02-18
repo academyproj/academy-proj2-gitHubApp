@@ -14,8 +14,6 @@ data class UsersSearchResponseData(
 data class UserFromSearchData(
     @SerializedName("avatar_url")
     val avatarUrl: String,
-    @SerializedName("gravatar_id")
-    val gravatarId: String,
     @SerializedName("html_url")
     val htmlUrl: String,
     @SerializedName("id")
