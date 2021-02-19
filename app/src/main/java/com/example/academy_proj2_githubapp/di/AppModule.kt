@@ -1,6 +1,7 @@
 package com.example.academy_proj2_githubapp.di
 
 import android.content.Context
+import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -30,5 +31,11 @@ class AppModule(private val context: Context) {
         return GsonConverterFactory.create(
             GsonBuilder().setLenient().create()
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(): SharedPrefs {
+        return SharedPrefs(context)
     }
 }
