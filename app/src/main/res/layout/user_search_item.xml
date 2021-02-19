@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/user_item_padding">
+    android:padding="@dimen/rv_item_padding">
 
     <ImageView
         android:id="@+id/ivUserItemAvatar"
@@ -16,9 +16,9 @@
         android:id="@+id/tvUserItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/user_item_sections_margin"
+        android:layout_marginStart="@dimen/rv_item_sections_margin"
         android:textColor="@color/white"
-        android:textSize="@dimen/user_item_name_size"
+        android:textSize="@dimen/rv_item_name_size"
         tools:text="User Name" />
 
 </LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/rv_item_padding"
+    tools:background="@color/bg_gray">
+
+    <TextView
+        android:id="@+id/tvRepoItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rv_item_name_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="AndroidAppMVVM" />
+
+    <TextView
+        android:id="@+id/tvRepoItemWatchers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rv_item_sections_margin"
+        android:drawablePadding="@dimen/default_drawable_padding"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rv_item_additional_size"
+        app:drawableStartCompat="@drawable/ic_baseline_remove_red_eye_24"
+        app:drawableTint="@color/teal_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRepoItemName"
+        tools:text="3" />
+
+    <TextView
+        android:id="@+id/tvRepoItemCreated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rv_item_additional_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRepoItemWatchers"
+        tools:text="Created at 12.12.20" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

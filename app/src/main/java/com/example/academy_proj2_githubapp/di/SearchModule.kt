@@ -1,6 +1,6 @@
 package com.example.academy_proj2_githubapp.di
 
-import com.example.academy_proj2_githubapp.search.data.SearchUsersService
+import com.example.academy_proj2_githubapp.search.data.api.SearchUsersService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

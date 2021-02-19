@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
+import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
+import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
 import javax.inject.Inject
 
 class SearchFragment : Fragment() {
@@ -26,6 +28,17 @@ class SearchFragment : Fragment() {
     lateinit var searchViewModel: SearchViewModel
 
     private lateinit var searchAdapter: SearchAdapter
+
+    // TODO Extract this to navigator
+    @Suppress("SimpleRedundantLet")
+    private fun testOpenProfile(username: String) {
+        activity?.let {
+            it.supportFragmentManager.beginTransaction()
+                .replace(R.id.flFragmentContainer, UserProfileFragment.newInstance(username))
+                .addToBackStack(null)
+                .commit()
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -64,7 +77,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupRv() {
-        searchAdapter = SearchAdapter()
+        searchAdapter = SearchAdapter(::testOpenProfile)
         binding.rvSearchResults.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = searchAdapter

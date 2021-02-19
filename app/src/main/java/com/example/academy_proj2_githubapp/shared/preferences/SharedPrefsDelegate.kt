@@ -10,12 +10,13 @@ class ShardePrefDelegate<T>(
     private val defValue: T,
 ) : ReadWriteProperty<Any?, T> {
 
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) = with(sharedPreferences.edit()) {
-        when (value) {
-            is String -> putString(key, value)
-            else -> throw IllegalAccessError("")
-        }.apply()
-    }
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) =
+        with(sharedPreferences.edit()) {
+            when (value) {
+                is String -> putString(key, value)
+                else -> throw IllegalAccessError("")
+            }.apply()
+        }
 
     @Suppress("UNCHECKED_CAST")
     override fun getValue(thisRef: Any?, property: KProperty<*>): T = with(sharedPreferences) {
