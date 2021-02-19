@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="default_screen_edge_padding">16dp</dimen>
+    <dimen name="default_drawable_padding">8dp</dimen>
+
+    <dimen name="rv_item_padding">16dp</dimen>
+    <dimen name="rv_item_name_size">24sp</dimen>
+    <dimen name="rv_item_sections_margin">16dp</dimen>
+    <dimen name="rv_item_additional_size">16sp</dimen>
+
     <dimen name="search_bar_padding">8dp</dimen>
-    <dimen name="user_item_padding">16dp</dimen>
     <dimen name="user_item_avatar_size">48dp</dimen>
-    <dimen name="user_item_name_size">24sp</dimen>
-    <dimen name="user_item_sections_margin">16dp</dimen>
+
+    <dimen name="user_profile_avatar_size">80dp</dimen>
+    <dimen name="user_profile_sections_margin">8dp</dimen>
+    <dimen name="user_profile_name_size">24sp</dimen>
+    <dimen name="user_profile_add_info_size">18sp</dimen>
+
 </resources>

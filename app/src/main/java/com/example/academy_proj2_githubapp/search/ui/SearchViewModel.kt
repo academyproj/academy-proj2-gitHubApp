@@ -2,11 +2,11 @@ package com.example.academy_proj2_githubapp.search.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.academy_proj2_githubapp.search.data.SearchUsersService
-import com.example.academy_proj2_githubapp.search.data.UserFromSearchData
-import com.example.academy_proj2_githubapp.search.data.UsersSearchErrors
-import com.example.academy_proj2_githubapp.search.data.UsersSearchResponseData
+import com.example.academy_proj2_githubapp.search.data.api.SearchUsersService
 import com.example.academy_proj2_githubapp.search.data.mappers.UsersSearchMapper
+import com.example.academy_proj2_githubapp.search.data.models.UserFromSearchModel
+import com.example.academy_proj2_githubapp.search.data.models.UsersSearchErrors
+import com.example.academy_proj2_githubapp.search.data.models.UsersSearchResponseData
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import com.example.academy_proj2_githubapp.shared.async.Result
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class SearchViewModel @Inject constructor(
             .postOnMainThread(::showResult)
     }
 
-    private fun showResult(result: Result<List<UserFromSearchData>, String>) {
+    private fun showResult(result: Result<List<UserFromSearchModel>, String>) {
         viewState.value = if (result.isError) {
             SearchViewState.SearchFailed(result.errorResult)
         } else {
@@ -51,6 +51,6 @@ class SearchViewModel @Inject constructor(
 
 sealed class SearchViewState {
     object SearchLoading : SearchViewState()
-    data class SearchSuccess(val data: List<UserFromSearchData>) : SearchViewState()
+    data class SearchSuccess(val data: List<UserFromSearchModel>) : SearchViewState()
     data class SearchFailed(val error: String) : SearchViewState()
 }

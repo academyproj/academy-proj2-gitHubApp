@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="@dimen/default_screen_edge_padding">
+
+    <ImageView
+        android:id="@+id/ivUserProfileAvatar"
+        android:layout_width="@dimen/user_profile_avatar_size"
+        android:layout_height="@dimen/user_profile_avatar_size"
+        android:background="@drawable/avatar_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUserProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/user_profile_sections_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/user_profile_name_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/ivUserProfileAvatar"
+        app:layout_constraintTop_toTopOf="@id/ivUserProfileAvatar"
+        tools:text="UserName" />
+
+    <TextView
+        android:id="@+id/tvUserProfileLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/user_profile_sections_margin"
+        android:textColor="@color/fg_gray"
+        android:textSize="@dimen/user_profile_name_size"
+        app:layout_constraintStart_toEndOf="@id/ivUserProfileAvatar"
+        app:layout_constraintTop_toBottomOf="@id/tvUserProfileName"
+        tools:text="UserLogin" />
+
+    <TextView
+        android:id="@+id/tvUserProfileJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/user_profile_sections_margin"
+        android:drawablePadding="@dimen/default_drawable_padding"
+        android:textColor="@color/white"
+        android:textSize="@dimen/user_profile_add_info_size"
+        app:drawableStartCompat="@drawable/ic_baseline_work_outline_24"
+        app:drawableTint="@color/fg_gray"
+        app:layout_constraintStart_toStartOf="@id/ivUserProfileAvatar"
+        app:layout_constraintTop_toBottomOf="@id/ivUserProfileAvatar"
+        tools:text="Parimatch" />
+
+    <TextView
+        android:id="@+id/tvUserProfileLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/user_profile_sections_margin"
+        android:drawablePadding="@dimen/default_drawable_padding"
+        android:textColor="@color/white"
+        android:textSize="@dimen/user_profile_add_info_size"
+        app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+        app:drawableTint="@color/fg_gray"
+        app:layout_constraintStart_toStartOf="@id/tvUserProfileJob"
+        app:layout_constraintTop_toBottomOf="@id/tvUserProfileJob"
+        tools:text="Ukraine" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUserRepos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/user_profile_sections_margin"
+        android:background="@color/bg_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUserProfileLocation" />
+
+    <ProgressBar
+        android:id="@+id/pbUserInfoLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
