@@ -3,6 +3,7 @@
     package="com.example.academy_proj2_githubapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:name=".AppApplication"
@@ -16,6 +17,16 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="academy-proj2-githubapp"
+                    android:host="callback" />
             </intent-filter>
         </activity>
     </application>

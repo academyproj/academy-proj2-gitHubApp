@@ -1,10 +1,7 @@
 package com.example.academy_proj2_githubapp.login.ui
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.graphics.Shader
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +19,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
 
     @Inject
-    lateinit var viewModel: LoginViewModel
+    lateinit var loginViewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,17 +38,50 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+        setupObserver()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getToken(requireActivity())
+        loginViewModel.checkForToken(requireActivity())
     }
 
     private fun setupListeners() {
         binding.btLogin.setOnClickListener {
-            viewModel.startLogin(requireActivity())
+            loginViewModel.startLogin(requireActivity())
+        }
+        binding.btLoginContinue.setOnClickListener {
+            //TODO next fragment
         }
     }
 
+    private fun setupObserver() {
+        loginViewModel.tokenStatus.observe(viewLifecycleOwner, ::updateUI)
+    }
+
+    private fun updateUI(tokenStatus: TokenStatus) {
+        when (tokenStatus) {
+            TokenStatus.EMPTY -> {
+                binding.apply {
+                    pbLogin.visibility = View.GONE
+                    btLogin.visibility = View.VISIBLE
+                    btLoginContinue.visibility = View.GONE
+                }
+            }
+            TokenStatus.LOADED -> {
+                binding.apply {
+                    pbLogin.visibility = View.GONE
+                    btLogin.visibility = View.GONE
+                    btLoginContinue.visibility = View.VISIBLE
+                }
+            }
+            TokenStatus.LOADING -> {
+                binding.apply {
+                    pbLogin.visibility = View.VISIBLE
+                    btLoginContinue.visibility = View.GONE
+                    btLogin.visibility = View.GONE
+                }
+            }
+        }
+    }
 }
