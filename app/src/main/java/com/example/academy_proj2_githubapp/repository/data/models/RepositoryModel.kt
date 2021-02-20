@@ -1,8 +1,6 @@
 package com.example.academy_proj2_githubapp.repository.data.models
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.security.acl.Owner
 
 
 // TODO clear useless fields
@@ -10,6 +8,8 @@ import java.security.acl.Owner
 data class RepositoryModel (
     @SerializedName("id")
     val id: Int,
+
+    var readme: String,
 
     @SerializedName("node_id")
     val nodeId: String,
@@ -21,15 +21,13 @@ data class RepositoryModel (
     val fullName: String,
 
     @SerializedName("owner")
-    val owner: Owner,
+    val owner: OwnerModel,
 
     @SerializedName("html_url")
     val htmlUrl: String,
 
-
-    //TODO check readme type
     @SerializedName("description")
-    val description: String? = null, //
+    val description: String? = null,
 
     @SerializedName("fork")
     val fork: Boolean,
