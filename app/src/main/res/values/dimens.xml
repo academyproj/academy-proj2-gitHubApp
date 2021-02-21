@@ -17,4 +17,5 @@
     <dimen name="user_profile_name_size">24sp</dimen>
     <dimen name="user_profile_add_info_size">18sp</dimen>
 
+    <dimen name="comment_avatar_size">48dp</dimen>
 </resources>

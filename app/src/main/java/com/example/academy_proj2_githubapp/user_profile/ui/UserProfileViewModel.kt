@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import com.example.academy_proj2_githubapp.shared.async.Result
+import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
 import com.example.academy_proj2_githubapp.user_profile.data.api.UserInfoService
 import com.example.academy_proj2_githubapp.user_profile.data.mappers.UserProfileMapper
 import com.example.academy_proj2_githubapp.user_profile.data.mappers.UserReposMapper
@@ -13,6 +14,7 @@ import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoMode
 import javax.inject.Inject
 
 class UserProfileViewModel @Inject constructor(
+    private val sharedPrefs: SharedPrefs,
     private val userProfileMapper: UserProfileMapper,
     private val userReposMapper: UserReposMapper,
     private val userInfoService: UserInfoService,
@@ -21,12 +23,16 @@ class UserProfileViewModel @Inject constructor(
 
     val viewState = MutableLiveData<UserInfoViewState>()
 
-    fun loadUserInfo(username: String) {
+    fun loadUserInfo(username: String?) {
         viewState.value = UserInfoViewState.Loading
 
         val asyncOperation =
             multithreading.async<Result<UserInfoModel, UserInfoErrors>> {
-                val user = userInfoService.getUser(username).execute().body()
+                val user = if (username.isNullOrEmpty()) {
+                    userInfoService.getCurrentUser(sharedPrefs.token)
+                } else {
+                    userInfoService.getUser(username)
+                }.execute().body()
                     ?: return@async Result.error(UserInfoErrors.USER_INFO_NOT_LOADED)
                 return@async Result.success(user)
             }

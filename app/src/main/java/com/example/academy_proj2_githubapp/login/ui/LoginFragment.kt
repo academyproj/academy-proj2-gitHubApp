@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.LoginFragmentBinding
+import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import javax.inject.Inject
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = LoginFragment()
@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
             loginViewModel.startLogin(requireActivity())
         }
         binding.btLoginContinue.setOnClickListener {
-            //TODO next fragment
+            navigator.openProfileFragment(null)
         }
     }
 
