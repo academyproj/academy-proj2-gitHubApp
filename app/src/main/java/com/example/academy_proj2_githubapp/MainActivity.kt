@@ -3,7 +3,8 @@ package com.example.academy_proj2_githubapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.academy_proj2_githubapp.databinding.ActivityMainBinding
-import com.example.academy_proj2_githubapp.repository.ui.RepositoryFragment
+import com.example.academy_proj2_githubapp.login.ui.LoginFragment
+import com.example.academy_proj2_githubapp.repository.ui.repository.RepositoryFragment
 import com.example.academy_proj2_githubapp.search.ui.SearchFragment
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         repositoryTest()
-//        tempTest()
+        //tempTest()
+        //loginTest()
     }
 
     // TODO delete this
@@ -29,10 +31,15 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-
     private fun repositoryTest() {
         supportFragmentManager.beginTransaction()
             .add(R.id.flFragmentContainer, RepositoryFragment.newInstance())
+            .commitAllowingStateLoss()
+    }
+
+    private fun loginTest() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.flFragmentContainer, LoginFragment.newInstance())
             .commitAllowingStateLoss()
     }
 

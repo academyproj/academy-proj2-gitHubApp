@@ -1,7 +1,8 @@
 package com.example.academy_proj2_githubapp.di
 
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
-import com.example.academy_proj2_githubapp.repository.ui.RepositoryViewModel
+import com.example.academy_proj2_githubapp.repository.ui.contributors.ContributorsViewModel
+import com.example.academy_proj2_githubapp.repository.ui.repository.RepositoryViewModel
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import dagger.Module
 import dagger.Provides
@@ -22,5 +23,8 @@ class RepoModule {
         return RepositoryViewModel(repositoryService, multithreading)
     }
 
-
+    @Provides
+    fun provideContributorsViewModel(repositoryService: RepositoryService, multithreading: Multithreading): ContributorsViewModel {
+        return ContributorsViewModel(repositoryService, multithreading)
+    }
 }

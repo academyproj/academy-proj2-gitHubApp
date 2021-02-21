@@ -1,4 +1,4 @@
-package com.example.academy_proj2_githubapp.repository.ui
+package com.example.academy_proj2_githubapp.repository.ui.repository
 
 import android.content.Context
 import android.os.Bundle
@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
+import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.RepositoryFragmentBinding
-import com.example.academy_proj2_githubapp.databinding.UserProfileFragmentBinding
+import com.example.academy_proj2_githubapp.repository.ui.contributors.ContributorsFragment
+import com.example.academy_proj2_githubapp.repository.ui.issues.IssuesFragment
 import javax.inject.Inject
 
 class RepositoryFragment : Fragment() {
@@ -45,7 +46,9 @@ class RepositoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
         setupObserver()
-        viewModel.loadRepo("Alehandrissimus", "buryachenko-proj1-GameScoreApp")
+
+        //TODO delete
+        viewModel.loadRepo("Alehandrissimus", "buryachenko-proj1-gamescoreapp")
     }
 
     override fun onAttach(context: Context) {
@@ -61,9 +64,16 @@ class RepositoryFragment : Fragment() {
     private fun setupListeners() {
         binding.apply {
             llContributors.setOnClickListener {
-
+                //TODO navigator
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.flFragmentContainer, ContributorsFragment.newInstance("Alehandrissimus", "buryachenko-proj1-gamescoreapp"))
+                    ?.addToBackStack(null)?.commit()
             }
             llIssues.setOnClickListener {
+                //TODO navigator
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.flFragmentContainer, IssuesFragment.newInstance("Alehandrissimus", "buryachenko-proj1-gamescoreapp"))
+                    ?.addToBackStack(null)?.commit()
 
             }
         }
@@ -79,11 +89,12 @@ class RepositoryFragment : Fragment() {
             is RepoState.RepoLoaded -> {
                 binding.apply {
                     pbRepository.visibility = View.GONE
+
                     tvRepoName.text = repoState.data.name
                     tvRepoUserName.text = repoState.data.owner.login
                     tvRepoIssuesCount.text = repoState.data.openIssuesCount.toString()
                     tvRepoReadme.text = repoState.data.readme
-                    Log.d("TAG", tvRepoReadme.text.toString())
+
                     Glide.with(ivRepoUserIcon)
                         .load(repoState.data.owner.avatarUrl)
                         .circleCrop()

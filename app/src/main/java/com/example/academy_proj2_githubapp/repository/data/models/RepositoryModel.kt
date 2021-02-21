@@ -21,7 +21,7 @@ data class RepositoryModel (
     val fullName: String,
 
     @SerializedName("owner")
-    val owner: OwnerModel,
+    val owner: UserModel,
 
     @SerializedName("html_url")
     val htmlUrl: String,

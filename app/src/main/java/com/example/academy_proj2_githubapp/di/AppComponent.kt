@@ -1,7 +1,10 @@
 package com.example.academy_proj2_githubapp.di
 
 import com.example.academy_proj2_githubapp.login.ui.LoginFragment
-import com.example.academy_proj2_githubapp.repository.ui.RepositoryFragment
+import com.example.academy_proj2_githubapp.repository.ui.contributors.ContributorsFragment
+import com.example.academy_proj2_githubapp.repository.ui.issues.IssueDetailsFragment
+import com.example.academy_proj2_githubapp.repository.ui.issues.IssuesFragment
+import com.example.academy_proj2_githubapp.repository.ui.repository.RepositoryFragment
 import com.example.academy_proj2_githubapp.search.ui.SearchFragment
 import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
 import dagger.Component
@@ -15,5 +18,8 @@ interface AppComponent {
     fun inject(fragment: LoginFragment)
     fun inject(fragment: UserProfileFragment)
     fun inject(fragment: RepositoryFragment)
+    fun inject(fragment: ContributorsFragment)
+    fun inject(fragment: IssuesFragment)
+    fun inject(fragment: IssueDetailsFragment)
 
 }

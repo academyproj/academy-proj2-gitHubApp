@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class OwnerModel(
+data class UserModel(
     @SerializedName("login")
     @Expose
     val login: String,

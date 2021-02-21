@@ -29,6 +29,7 @@ class LoginViewModel @Inject constructor(
             tokenStatus.postValue(TokenStatus.EMPTY)
             getToken(activity)
         } else {
+            Log.d("TAG", sharedPreferences.token)
             tokenStatus.postValue(TokenStatus.LOADED)
         }
     }

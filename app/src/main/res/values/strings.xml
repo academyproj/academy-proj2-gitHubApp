@@ -5,4 +5,6 @@
     <string name="access_denied_error">Access denied</string>
     <string name="login">login</string>
     <string name="continueLogin">continue</string>
+    <string name="issues">Issues</string>
+    <string name="contributors">Contributors</string>
 </resources>

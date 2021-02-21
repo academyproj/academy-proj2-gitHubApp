@@ -2,9 +2,12 @@ package com.example.academy_proj2_githubapp.di
 
 import android.content.Context
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
+import com.example.academy_proj2_githubapp.shared.tools.TokenInterceptor
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,8 +21,14 @@ class AppModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
+    fun provideRetrofit(gsonConverterFactory: GsonConverterFactory, tokenInterceptor: TokenInterceptor): Retrofit {
         return Retrofit.Builder()
+            .client(
+                OkHttpClient().newBuilder()
+                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .addInterceptor(tokenInterceptor)
+                    .build()
+            )
             .baseUrl("https://api.github.com/")
             .addConverterFactory(gsonConverterFactory)
             .build()
@@ -37,5 +46,11 @@ class AppModule(private val context: Context) {
     @Singleton
     fun provideSharedPreferences(): SharedPrefs {
         return SharedPrefs(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTokenInterceptor(sharedPrefs: SharedPrefs): TokenInterceptor {
+        return TokenInterceptor(sharedPrefs)
     }
 }

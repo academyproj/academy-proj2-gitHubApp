@@ -1,7 +1,6 @@
-package com.example.academy_proj2_githubapp.repository.ui
+package com.example.academy_proj2_githubapp.repository.ui.repository
 
 import android.util.Base64
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
