@@ -18,6 +18,8 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var binding: LoginFragmentBinding
 
+    override val isSearchButtonVisible: Boolean = false
+
     @Inject
     lateinit var loginViewModel: LoginViewModel
 

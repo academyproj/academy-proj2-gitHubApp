@@ -28,7 +28,7 @@ class Navigator(
 
     fun openSearchFragment() {
         fragmentManager.beginTransaction()
-            .add(containerId, SearchFragment.newInstance())
+            .replace(containerId, SearchFragment.newInstance())
             .addToBackStack(null)
             .commit()
     }

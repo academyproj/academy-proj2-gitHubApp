@@ -22,6 +22,8 @@ class SearchFragment : BaseFragment() {
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
 
+    override val isSearchButtonVisible: Boolean = false
+
     @Inject
     lateinit var searchViewModel: SearchViewModel
 

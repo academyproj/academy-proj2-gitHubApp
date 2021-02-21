@@ -31,6 +31,8 @@ class UserProfileFragment : BaseFragment() {
     private var _binding: UserProfileFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
 
+    override val isSearchButtonVisible: Boolean = true
+
     @Inject
     lateinit var userProfileViewModel: UserProfileViewModel
 

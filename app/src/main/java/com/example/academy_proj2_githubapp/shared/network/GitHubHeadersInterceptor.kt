@@ -5,7 +5,8 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class GitHubHeadersInterceptor @Inject constructor(private val sharedPrefs: SharedPrefs): Interceptor {
+class GitHubHeadersInterceptor @Inject constructor(private val sharedPrefs: SharedPrefs) :
+    Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
         proceed(
             request()

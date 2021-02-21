@@ -1,10 +1,10 @@
 package com.example.academy_proj2_githubapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.academy_proj2_githubapp.databinding.NavigationActivityBinding
 import com.example.academy_proj2_githubapp.navigation.Navigator
-import com.example.academy_proj2_githubapp.search.ui.SearchFragment
 
 class NavigationActivity : AppCompatActivity() {
 
@@ -24,12 +24,16 @@ class NavigationActivity : AppCompatActivity() {
         navigator.openLoginFragment()
     }
 
-
-    // TODO replace button with status bar
     private fun setupSearchButton() {
         binding.fbOpenSearch.setOnClickListener {
             navigator.openSearchFragment()
         }
+    }
+
+    fun setSearchButtonVisibility(isVisible: Boolean) {
+        binding.fbOpenSearch.visibility =
+            if (isVisible) View.VISIBLE
+            else View.GONE
     }
 
 }
