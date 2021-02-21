@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
-import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
-import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
+import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import javax.inject.Inject
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SearchFragment()
@@ -24,21 +22,12 @@ class SearchFragment : Fragment() {
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
 
+    override val isSearchButtonVisible: Boolean = false
+
     @Inject
     lateinit var searchViewModel: SearchViewModel
 
     private lateinit var searchAdapter: SearchAdapter
-
-    // TODO Extract this to navigator
-    @Suppress("SimpleRedundantLet")
-    private fun testOpenProfile(username: String) {
-        activity?.let {
-            it.supportFragmentManager.beginTransaction()
-                .replace(R.id.flFragmentContainer, UserProfileFragment.newInstance(username))
-                .addToBackStack(null)
-                .commit()
-        }
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -77,7 +66,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupRv() {
-        searchAdapter = SearchAdapter(::testOpenProfile)
+        searchAdapter = SearchAdapter(navigator::openProfileFragment)
         binding.rvSearchResults.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = searchAdapter

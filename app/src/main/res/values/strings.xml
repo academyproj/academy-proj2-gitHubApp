@@ -5,4 +5,9 @@
     <string name="access_denied_error">Access denied</string>
     <string name="login">login</string>
     <string name="continueLogin">continue</string>
+    <string name="no_location">No location info</string>
+    <string name="no_company">No company info</string>
+    <string name="user_info_not_loaded">Failed to load user info</string>
+    <string name="repos_info_not_loaded">Failed to load repos</string>
+    <string name="unknown_error">Something went wrong</string>
 </resources>
