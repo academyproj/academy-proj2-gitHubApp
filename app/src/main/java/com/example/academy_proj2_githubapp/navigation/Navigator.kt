@@ -21,6 +21,7 @@ class Navigator(
         val transaction = fragmentManager.beginTransaction()
             .replace(containerId, UserProfileFragment.newInstance(userName))
 
+        // Don't add login fragment to BackStack
         userName?.let { transaction.addToBackStack(null) }
         transaction.commit()
     }

@@ -14,7 +14,6 @@ import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoMode
 import javax.inject.Inject
 
 class UserProfileViewModel @Inject constructor(
-    private val sharedPrefs: SharedPrefs,
     private val userProfileMapper: UserProfileMapper,
     private val userReposMapper: UserReposMapper,
     private val userInfoService: UserInfoService,
@@ -29,7 +28,7 @@ class UserProfileViewModel @Inject constructor(
         val asyncOperation =
             multithreading.async<Result<UserInfoModel, UserInfoErrors>> {
                 val user = if (username.isNullOrEmpty()) {
-                    userInfoService.getCurrentUser(sharedPrefs.token)
+                    userInfoService.getCurrentUser()
                 } else {
                     userInfoService.getUser(username)
                 }.execute().body()
