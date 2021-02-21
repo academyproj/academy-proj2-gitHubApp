@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.UserProfileFragmentBinding
+import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import javax.inject.Inject
 
 private const val USERNAME_PARAM = "USERNAME_PARAM"
 
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : BaseFragment() {
 
     companion object {
-        fun newInstance(username: String): UserProfileFragment {
+        fun newInstance(username: String?): UserProfileFragment {
             val args = Bundle().apply {
                 putString(USERNAME_PARAM, username)
             }
@@ -30,6 +30,8 @@ class UserProfileFragment : Fragment() {
 
     private var _binding: UserProfileFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
+
+    override val isSearchButtonVisible: Boolean = true
 
     @Inject
     lateinit var userProfileViewModel: UserProfileViewModel
@@ -62,9 +64,7 @@ class UserProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRv()
         setupObserver()
-        username?.let {
-            userProfileViewModel.loadUserInfo(it)
-        }
+        userProfileViewModel.loadUserInfo(username)
     }
 
     private fun setupRv() {

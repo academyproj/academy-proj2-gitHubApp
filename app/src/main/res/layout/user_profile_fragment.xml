@@ -23,6 +23,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/user_profile_name_size"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/ivUserProfileAvatar"
         app:layout_constraintTop_toTopOf="@id/ivUserProfileAvatar"
         tools:text="UserName" />
@@ -34,6 +36,8 @@
         android:layout_marginStart="@dimen/user_profile_sections_margin"
         android:textColor="@color/fg_gray"
         android:textSize="@dimen/user_profile_name_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/ivUserProfileAvatar"
         app:layout_constraintTop_toBottomOf="@id/tvUserProfileName"
         tools:text="UserLogin" />
