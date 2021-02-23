@@ -13,7 +13,7 @@ class UserProfileMapper @Inject constructor(private val context: Context) {
 
             val name = it.name ?: it.login
             val company = it.company ?: context.getString(R.string.no_company)
-            val location = it.company ?: context.getString(R.string.no_location)
+            val location = it.location ?: context.getString(R.string.no_location)
 
             UserInfoModel(
                 id = it.id,
