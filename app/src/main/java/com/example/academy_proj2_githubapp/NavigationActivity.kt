@@ -16,12 +16,12 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupBinding()
         setupSearchButton()
+        navigator.openLoginFragment()
     }
 
     private fun setupBinding() {
         binding = NavigationActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navigator.openLoginFragment()
     }
 
     private fun setupSearchButton() {

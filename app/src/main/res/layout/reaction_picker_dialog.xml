@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_gray">
+
+    <ImageView
+        android:id="@+id/ivPlusOne"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/plus_one"
+        android:padding="@dimen/emoji_padding"
+        app:layout_constraintBottom_toTopOf="@+id/ivConfused"
+        app:layout_constraintEnd_toStartOf="@+id/ivMinusOne"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivMinusOne"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:padding="@dimen/emoji_padding"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/minus_one"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPlusOne"
+        app:layout_constraintEnd_toStartOf="@+id/ivLaugh"
+        app:layout_constraintStart_toEndOf="@+id/ivPlusOne"
+        app:layout_constraintTop_toTopOf="@+id/ivPlusOne" />
+
+    <ImageView
+        android:id="@+id/ivLaugh"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:padding="@dimen/emoji_padding"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/laugh"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPlusOne"
+        app:layout_constraintEnd_toStartOf="@+id/ivHooray"
+        app:layout_constraintStart_toEndOf="@+id/ivMinusOne"
+        app:layout_constraintTop_toTopOf="@+id/ivPlusOne" />
+
+    <ImageView
+        android:id="@+id/ivHooray"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/hooray"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPlusOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/emoji_padding"
+        app:layout_constraintStart_toEndOf="@+id/ivLaugh"
+        app:layout_constraintTop_toTopOf="@+id/ivPlusOne" />
+
+    <ImageView
+        android:id="@+id/ivConfused"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/confused"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivHeart"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/emoji_padding"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlusOne" />
+
+    <ImageView
+        android:id="@+id/ivHeart"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/heart"
+        app:layout_constraintBottom_toBottomOf="@+id/ivConfused"
+        app:layout_constraintEnd_toStartOf="@+id/ivRocket"
+        app:layout_constraintStart_toEndOf="@+id/ivConfused"
+        android:padding="@dimen/emoji_padding"
+        app:layout_constraintTop_toTopOf="@+id/ivConfused" />
+
+    <ImageView
+        android:id="@+id/ivRocket"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/rocket"
+        app:layout_constraintBottom_toBottomOf="@+id/ivConfused"
+        app:layout_constraintEnd_toStartOf="@+id/ivEyes"
+        android:padding="@dimen/emoji_padding"
+        app:layout_constraintStart_toEndOf="@+id/ivHeart"
+        app:layout_constraintTop_toTopOf="@+id/ivConfused" />
+
+    <ImageView
+        android:id="@+id/ivEyes"
+        android:layout_width="@dimen/reaction_picker_emoji_size"
+        android:layout_height="@dimen/reaction_picker_emoji_size"
+        android:layout_margin="@dimen/emoji_margin"
+        android:src="@drawable/eyes"
+        app:layout_constraintBottom_toBottomOf="@+id/ivConfused"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/emoji_padding"
+        app:layout_constraintStart_toEndOf="@+id/ivRocket"
+        app:layout_constraintTop_toTopOf="@+id/ivConfused" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
