@@ -1,6 +1,7 @@
 package com.example.academy_proj2_githubapp.login.data
 
 import android.net.Uri
+import android.util.Log
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
 import com.example.academy_proj2_githubapp.login.data.models.User
 import javax.inject.Inject
@@ -43,8 +44,8 @@ class GitHubUtils @Inject constructor(
         return loginService.getAccessToken(clientId, clientSecret, code)
     }
 
-    suspend fun getUser(token: String): User {
-        return userService.getUser(token)
+    suspend fun getUser(): User {
+        return userService.getUser()
     }
 
 }

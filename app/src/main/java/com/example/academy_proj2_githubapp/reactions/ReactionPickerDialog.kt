@@ -34,11 +34,11 @@ class ReactionPickerDialog : DialogFragment() {
             binding.ivPlusOne to ReactionType.PLUS_ONE,
             binding.ivMinusOne to ReactionType.MINUS_ONE,
             binding.ivEyes to ReactionType.EYES,
-            binding.ivConfused to ReactionType.PLUS_ONE,
-            binding.ivHeart to ReactionType.PLUS_ONE,
-            binding.ivHooray to ReactionType.PLUS_ONE,
-            binding.ivRocket to ReactionType.PLUS_ONE,
-            binding.ivLaugh to ReactionType.PLUS_ONE,
+            binding.ivConfused to ReactionType.CONFUSED,
+            binding.ivHeart to ReactionType.HEART,
+            binding.ivHooray to ReactionType.HOORAY,
+            binding.ivRocket to ReactionType.ROCKET,
+            binding.ivLaugh to ReactionType.LAUGH,
         )
     }
 

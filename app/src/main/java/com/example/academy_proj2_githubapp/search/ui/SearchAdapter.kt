@@ -49,7 +49,7 @@ class UsersSearchDiffCallback : DiffUtil.ItemCallback<UserFromSearchModel>() {
         oldItem: UserFromSearchModel,
         newItem: UserFromSearchModel
     ): Boolean {
-        return oldItem == newItem
+        return oldItem.login == newItem.login
     }
 
     override fun areContentsTheSame(

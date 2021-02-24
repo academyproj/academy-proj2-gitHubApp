@@ -11,7 +11,7 @@ import com.example.academy_proj2_githubapp.databinding.RepoItemBinding
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoModel
 
 class ReposAdapter :
-    ListAdapter<UserRepoModel, RepoItemViewHolder>(UsersSearchDiffCallback()) {
+    ListAdapter<UserRepoModel, RepoItemViewHolder>(ReposDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoItemViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,12 +38,12 @@ class RepoItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 }
 
-class UsersSearchDiffCallback : DiffUtil.ItemCallback<UserRepoModel>() {
+class ReposDiffCallback : DiffUtil.ItemCallback<UserRepoModel>() {
     override fun areItemsTheSame(
         oldItem: UserRepoModel,
         newItem: UserRepoModel
     ): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(

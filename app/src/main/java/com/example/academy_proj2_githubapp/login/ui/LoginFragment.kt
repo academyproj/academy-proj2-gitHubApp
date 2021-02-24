@@ -55,6 +55,9 @@ class LoginFragment : BaseFragment() {
         binding.btLoginContinue.setOnClickListener {
             navigator.openProfileFragment(null)
         }
+        binding.btLoginLogout.setOnClickListener {
+            loginViewModel.clearCookies()
+        }
     }
 
     private fun setupObserver() {
@@ -68,6 +71,7 @@ class LoginFragment : BaseFragment() {
                     pbLogin.visibility = View.GONE
                     btLogin.visibility = View.VISIBLE
                     btLoginContinue.visibility = View.GONE
+                    btLoginLogout.visibility = View.GONE
                 }
             }
             TokenStatus.LOADED -> {
@@ -75,6 +79,7 @@ class LoginFragment : BaseFragment() {
                     pbLogin.visibility = View.GONE
                     btLogin.visibility = View.GONE
                     btLoginContinue.visibility = View.VISIBLE
+                    btLoginLogout.visibility = View.VISIBLE
                 }
             }
             TokenStatus.LOADING -> {
@@ -82,6 +87,7 @@ class LoginFragment : BaseFragment() {
                     pbLogin.visibility = View.VISIBLE
                     btLoginContinue.visibility = View.GONE
                     btLogin.visibility = View.GONE
+                    btLoginLogout.visibility = View.GONE
                 }
             }
         }

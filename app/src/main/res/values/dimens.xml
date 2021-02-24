@@ -23,4 +23,7 @@
     <dimen name="reaction_picker_emoji_size">36dp</dimen>
     <dimen name="emoji_margin">16dp</dimen>
     <dimen name="emoji_padding">4dp</dimen>
+
+    <dimen name="issue_details_title_size">32sp</dimen>
+    <dimen name="issue_details_section_margin">4dp</dimen>
 </resources>

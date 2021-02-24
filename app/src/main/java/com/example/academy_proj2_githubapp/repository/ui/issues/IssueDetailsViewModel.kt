@@ -16,15 +16,15 @@ class IssueDetailsViewModel @Inject constructor(
     val viewState = MutableLiveData<IssueDetailsViewState>()
 
     fun getIssues(owner: String, repo: String, issue: Int) {
-        viewState.postValue(IssueDetailsViewState.IssueDetailsLoading)
-
-        val operation = multithreading.async<Result<IssueModel, String>> {
-            val users = repositoryService.getRepoIssueDetails(owner, repo, issue).execute().body()
-                ?: return@async Result.error("IssueDetails not loaded")
-            return@async Result.success(users)
-        }
-
-        operation.postOnMainThread(::showResult)
+//        viewState.postValue(IssueDetailsViewState.IssueDetailsLoading)
+//
+//        val operation = multithreading.async<Result<IssueModel, String>> {
+//            val users = repositoryService.getRepoIssueDetails(owner, repo, issue).execute().body()
+//                ?: return@async Result.error("IssueDetails not loaded")
+//            return@async Result.success(users)
+//        }
+//
+//        operation.postOnMainThread(::showResult)
     }
 
     private fun showResult(result: Result<IssueModel, String>) {

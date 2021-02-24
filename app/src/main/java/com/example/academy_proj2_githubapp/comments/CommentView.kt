@@ -52,7 +52,10 @@ class CommentView @JvmOverloads constructor(
                         text = quantity.toString()
                         setTextColor(context.getColor(R.color.white))
                         textAlignment = TEXT_ALIGNMENT_CENTER
-                        setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.rv_item_name_size))
+                        setTextSize(
+                            TypedValue.COMPLEX_UNIT_PX,
+                            resources.getDimension(R.dimen.rv_item_name_size)
+                        )
                         setCompoundDrawablesRelativeWithIntrinsicBounds(reaction.src, 0, 0, 0)
                     }
                     binding.llCommentReactionsMigrage.addView(view)
