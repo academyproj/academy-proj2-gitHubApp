@@ -9,16 +9,10 @@ data class RepositoryModel (
     @SerializedName("id")
     val id: Int,
 
-    var readme: String,
-
-    @SerializedName("node_id")
-    val nodeId: String,
+    var readme: String?,
 
     @SerializedName("name")
     val name: String,
-
-    @SerializedName("full_name")
-    val fullName: String,
 
     @SerializedName("owner")
     val owner: UserModel,
@@ -28,9 +22,6 @@ data class RepositoryModel (
 
     @SerializedName("description")
     val description: String? = null,
-
-    @SerializedName("fork")
-    val fork: Boolean,
 
     @SerializedName("url")
     val url: String,
@@ -89,59 +80,14 @@ data class RepositoryModel (
     @SerializedName("contributors_url")
     val contributorsUrl: String,
 
-    @SerializedName("subscribers_url")
-    val subscribersUrl: String,
-
-    @SerializedName("subscription_url")
-    val subscriptionUrl: String,
-
-    @SerializedName("commits_url")
-    val commitsUrl: String,
-
-    @SerializedName("git_commits_url")
-    val gitCommitsUrl: String,
-
     @SerializedName("comments_url")
     val commentsUrl: String,
 
     @SerializedName("issue_comment_url")
     val issueCommentUrl: String,
 
-    @SerializedName("contents_url")
-    val contentsUrl: String,
-
-    @SerializedName("compare_url")
-    val compareUrl: String,
-
-    @SerializedName("merges_url")
-    val mergesUrl: String,
-
-    @SerializedName("archive_url")
-    val archiveUrl: String,
-
-    @SerializedName("downloads_url")
-    val downloadsUrl: String,
-
     @SerializedName("issues_url")
     val issuesUrl: String,
-
-    @SerializedName("pulls_url")
-    val pullsUrl: String,
-
-    @SerializedName("milestones_url")
-    val milestonesUrl: String,
-
-    @SerializedName("notifications_url")
-    val notificationsUrl: String,
-
-    @SerializedName("labels_url")
-    val labelsUrl: String,
-
-    @SerializedName("releases_url")
-    val releasesUrl: String,
-
-    @SerializedName("deployments_url")
-    val deploymentsUrl: String,
 
     @SerializedName("created_at")
     val createdAt: String,
@@ -152,29 +98,11 @@ data class RepositoryModel (
     @SerializedName("pushed_at")
     val pushedAt: String,
 
-    @SerializedName("git_url")
-    val gitUrl: String,
-
-    @SerializedName("ssh_url")
-    val sshUrl: String,
-
-    @SerializedName("clone_url")
-    val cloneUrl: String,
-
-    @SerializedName("svn_url")
-    val svnUrl: String,
-
-    @SerializedName("size")
-    val size: Int,
-
     @SerializedName("stargazers_count")
     val stargazersCount: Int,
 
     @SerializedName("watchers_count")
     val watchersCount: Int,
-
-    @SerializedName("language")
-    val language: String,
 
     @SerializedName("has_issues")
     val hasIssues: Boolean,
@@ -187,9 +115,6 @@ data class RepositoryModel (
 
     @SerializedName("forks_count")
     val forksCount: Int,
-
-    @SerializedName("archived")
-    val archived: Boolean,
 
     @SerializedName("disabled")
     val disabled: Boolean,
@@ -208,9 +133,6 @@ data class RepositoryModel (
 
     @SerializedName("default_branch")
     val defaultBranch: String,
-
-    @SerializedName("network_count")
-    val networkCount: Int,
 
     @SerializedName("subscribers_count")
     val subscribersCount: Int,

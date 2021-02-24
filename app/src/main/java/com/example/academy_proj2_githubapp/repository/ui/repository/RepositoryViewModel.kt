@@ -1,11 +1,11 @@
 package com.example.academy_proj2_githubapp.repository.ui.repository
 
-import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
 import com.example.academy_proj2_githubapp.repository.data.models.RepositoryModel
 import com.example.academy_proj2_githubapp.repository.data.models.RepositoryReadmeModel
+import com.example.academy_proj2_githubapp.repository.data.models.RepositoryUiModel
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import com.example.academy_proj2_githubapp.shared.async.Result
 import javax.inject.Inject
@@ -14,12 +14,13 @@ import javax.inject.Inject
 sealed class RepoState {
     object RepoLoading : RepoState()
     data class RepoError(val error: String) : RepoState()
-    data class RepoLoaded(val data: RepositoryModel) : RepoState()
+    data class RepoLoaded(val data: RepositoryUiModel) : RepoState()
 }
 
 class RepositoryViewModel @Inject constructor(
     private val repositoryService: RepositoryService,
     private val multithreading: Multithreading,
+    private val repoToUiMapper: RepoToUiMapper,
 ) : ViewModel() {
 
     val repoState = MutableLiveData<RepoState>()
@@ -38,35 +39,29 @@ class RepositoryViewModel @Inject constructor(
         operation.postOnMainThread(::showResult)
     }
 
-    private fun showResult(info: Result<RepositoryModel, String>) {
-        if (info.isError) {
-            repoState.postValue(RepoState.RepoError(info.errorResult))
+    private fun showResult(repoModel: Result<RepositoryModel, String>) {
+        if (repoModel.isError) {
+            repoState.postValue(RepoState.RepoError(repoModel.errorResult))
         } else {
             val operation = multithreading.async<Result<RepositoryReadmeModel, String>> {
                 val result =
                     repositoryService.getRepoReadme(
-                        info.successResult.owner.login,
-                        info.successResult.name
+                        owner = repoModel.successResult.owner.login,
+                        repo = repoModel.successResult.name
                     ).execute().body()
-                        ?: return@async Result.error("Readme unincluded")
+                        ?: return@async Result.error("Readme not included")
 
                 return@async Result.success(result)
             }
 
-            operation.postOnMainThread {
-                if (it.isError) {
-                    info.successResult.readme = it.errorResult
-                    repoState.postValue(RepoState.RepoLoaded(info.successResult))
+            operation.postOnMainThread { readmeResult ->
+                if (readmeResult.isError) {
+                    repoState.postValue(RepoState.RepoLoaded(repoModel.mapSuccess(repoToUiMapper::map).successResult))
                 } else {
-                    info.successResult.readme = decode(it.successResult.content)
-                    repoState.postValue(RepoState.RepoLoaded(info.successResult))
+                    repoModel.successResult.readme = readmeResult.successResult.content
+                    repoState.postValue(RepoState.RepoLoaded(repoModel.mapSuccess(repoToUiMapper::map).successResult))
                 }
             }
         }
-    }
-
-    private fun decode(string: String): String {
-        val result = string.replace("\\n", "", false)
-        return Base64.decode(result, 0).decodeToString()
     }
 }

@@ -3,26 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:background="@color/bg_gray"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal">
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_margin="12dp" />
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_error_outline_24" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginTop="18dp"
         android:layout_marginBottom="12dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvIssuesItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             tools:text="reponame+issue num" />
 
         <TextView
@@ -31,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:maxLines="2"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
@@ -40,6 +44,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_margin="12dp"
         tools:text="time" />
 

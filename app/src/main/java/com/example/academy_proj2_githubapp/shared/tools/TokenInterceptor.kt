@@ -9,7 +9,7 @@ import okhttp3.Response
 import okhttp3.internal.http2.Header
 import javax.inject.Inject
 
-//TODO token header
+//TODO delete
 class TokenInterceptor @Inject constructor(
     private val sharedPrefs: SharedPrefs
 ) : Interceptor {
