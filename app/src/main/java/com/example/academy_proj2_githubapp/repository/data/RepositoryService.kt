@@ -29,11 +29,19 @@ interface RepositoryService {
     ): Call<List<IssueModel>>
 
 
-    fun getRepoIssueDetails(
+    @GET("repos/{owner}/{repo}/issues/{number}/comments")
+    fun getRepoIssueComments(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
         @Path("number") issueNumber: Int,
     ): Call<List<CommentModel>>
+
+    @GET("repos/{owner}/{repo}/issues/{number}")
+    fun getIssueDetails(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+        @Path("number") issueNumber: Int,
+    ): Call<IssueDetailsMigrationModel>
 
     @GET("repos/{owner}/{repo}/issues/comments/{id}/reactions")
     fun getCommentReactions(

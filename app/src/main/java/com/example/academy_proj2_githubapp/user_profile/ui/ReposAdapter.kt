@@ -12,7 +12,7 @@ import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoMode
 import java.security.acl.Owner
 
 class ReposAdapter(private val callback: (RepoCallback) -> Unit) :
-    ListAdapter<UserRepoModel, RepoItemViewHolder>(UsersSearchDiffCallback()) {
+    ListAdapter<UserRepoModel, RepoItemViewHolder>(ReposDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoItemViewHolder {
         val view = LayoutInflater.from(parent.context)

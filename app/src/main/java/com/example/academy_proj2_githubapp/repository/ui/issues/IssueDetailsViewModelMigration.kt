@@ -29,7 +29,7 @@ class IssueDetailsViewModelMigration @Inject constructor(
         val asyncOperation =
             multithreading.async<Result<IssueDetailsMigrationModel, IssueErrors>> {
 
-                val issue = repositoryService.getRepoIssueMigrationDetails(owner, repo, issueId)
+                val issue = repositoryService.getIssueDetails(owner, repo, issueId)
                     .execute().body() ?: return@async Result.error(IssueErrors.ISSUE_NOT_LOADED)
 
                 return@async Result.success(issue)
@@ -48,7 +48,7 @@ class IssueDetailsViewModelMigration @Inject constructor(
     private fun loadComments(owner: String, repo: String, issueId: Int) {
         multithreading.async<Result<List<CommentModel>, IssueErrors>> {
 
-            val comments = repositoryService.getIssueComments(owner, repo, issueId)
+            val comments = repositoryService.getRepoIssueComments(owner, repo, issueId)
                 .execute().body() ?: return@async Result.error(IssueErrors.COMMENTS_NOT_LOADED)
 
             return@async Result.success(comments)

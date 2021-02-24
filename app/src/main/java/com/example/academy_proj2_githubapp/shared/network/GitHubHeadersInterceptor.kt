@@ -12,7 +12,7 @@ class GitHubHeadersInterceptor @Inject constructor(private val sharedPrefs: Shar
             proceed(
                 request()
                     .newBuilder()
-                    .addHeader("Accept", "application/vnd.github.v3+json")
+                    .addHeader("Accept", "application/vnd.github.squirrel-girl-preview+json")
                     .addHeader("Authorization", sharedPrefs.token)
                     .build()
             )
@@ -20,7 +20,7 @@ class GitHubHeadersInterceptor @Inject constructor(private val sharedPrefs: Shar
             proceed(
                 request()
                     .newBuilder()
-                    .addHeader("Accept", "application/vnd.github.v3+json")
+                    .addHeader("Accept", "application/vnd.github.squirrel-girl-preview+json")
                     .build()
             )
         }

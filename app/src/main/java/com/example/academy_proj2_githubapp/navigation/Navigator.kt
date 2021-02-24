@@ -5,7 +5,10 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.login.ui.LoginFragment
+import com.example.academy_proj2_githubapp.reactions.ReactionPickerDialog
+import com.example.academy_proj2_githubapp.reactions.models.ReactionType
 import com.example.academy_proj2_githubapp.repository.ui.contributors.ContributorsFragment
+import com.example.academy_proj2_githubapp.repository.ui.issues.IssueDetailsFragmentMigration
 import com.example.academy_proj2_githubapp.repository.ui.issues.IssuesFragment
 import com.example.academy_proj2_githubapp.repository.ui.repository.RepositoryFragment
 import com.example.academy_proj2_githubapp.search.ui.SearchFragment
@@ -59,6 +62,18 @@ class Navigator(
             .commit()
     }
 
+    fun openReactionsDialog(
+        chosenReactions: List<ReactionType>,
+        onReactionSelected: (ReactionType) -> Unit
+    ) {
+        ReactionPickerDialog.newInstance(chosenReactions, onReactionSelected)
+            .show(fragmentManager, ReactionPickerDialog.REACTION_PICKER_TAG)
+    }
 
+    fun openIssueDetails(owner: String, repo: String, issueId: Int) {
+        fragmentManager.beginTransaction()
+            .replace(containerId, IssueDetailsFragmentMigration.newInstance(owner, repo, issueId))
+            .commit()
+    }
 
 }

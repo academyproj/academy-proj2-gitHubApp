@@ -54,6 +54,11 @@ class ReactionPickerDialog : DialogFragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        dialog?.dismiss()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         reactionViews.keys.forEach { reactionView ->

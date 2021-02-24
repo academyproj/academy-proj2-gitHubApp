@@ -2,21 +2,18 @@ package com.example.academy_proj2_githubapp.repository.ui.issues
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
-import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.IssuesFragmentBinding
-import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
+import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import javax.inject.Inject
 
-class IssuesFragment : Fragment() {
+class IssuesFragment : BaseFragment() {
 
     companion object {
         private const val KEY_OWNER = "KEY_OWNER"
@@ -34,10 +31,15 @@ class IssuesFragment : Fragment() {
         }
     }
 
+    override val isSearchButtonVisible: Boolean = true
+
     lateinit var binding: IssuesFragmentBinding
     @Inject
     lateinit var viewModel: IssuesViewModel
     private lateinit var issuesRVAdapter: IssuesRVAdapter
+
+    private var owner: String = ""
+    private var repo: String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,11 +60,11 @@ class IssuesFragment : Fragment() {
         setupRv()
         setupObserver()
 
-        arguments?.getString(KEY_OWNER, "")?.let { owner ->
-            arguments?.getString(KEY_REPO, "")?.let { repo ->
-                viewModel.getIssues(owner, repo)
-            }
+        arguments?.let {
+            owner = it.getString(KEY_OWNER, "")
+            repo = it.getString(KEY_REPO, "")
         }
+        viewModel.getIssues(owner, repo)
     }
 
     private fun setupObserver() {
@@ -70,7 +72,7 @@ class IssuesFragment : Fragment() {
     }
 
     private fun setupRv() {
-        issuesRVAdapter = IssuesRVAdapter(::test)
+        issuesRVAdapter = IssuesRVAdapter(::openIssueDetails)
         binding.rvIssuesResults.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
@@ -93,11 +95,8 @@ class IssuesFragment : Fragment() {
         }
     }
 
-    //TODO navigator
-    private fun test(issue: IssueCallbackModel) {
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.flFragmentContainer, IssueDetailsFragment.newInstance(issue.owner, issue.repo, issue.issue))
-            ?.addToBackStack(null)?.commit()
+    private fun openIssueDetails(callback: IssueCallbackModel) {
+        navigator.openIssueDetails(owner, repo, callback.issue)
     }
 
 }
