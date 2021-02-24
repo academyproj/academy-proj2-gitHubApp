@@ -3,12 +3,14 @@ package com.example.academy_proj2_githubapp.login.ui
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
+import android.webkit.CookieManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.login.data.GitHubUtils
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.Cookie
 import javax.inject.Inject
 
 enum class TokenStatus {
@@ -25,11 +27,11 @@ class LoginViewModel @Inject constructor(
     val tokenStatus = MutableLiveData<TokenStatus>()
 
     fun checkForToken(activity: Activity) {
+        Log.d("TAG" , "check ${sharedPreferences.token}")
         if (sharedPreferences.token == "") {
             tokenStatus.postValue(TokenStatus.EMPTY)
             getToken(activity)
         } else {
-            Log.d("TAG", sharedPreferences.token)
             tokenStatus.postValue(TokenStatus.LOADED)
         }
     }
@@ -43,10 +45,9 @@ class LoginViewModel @Inject constructor(
             val response = gitHubUtils.getAccessToken(code)
             val token = "${response.tokenType} ${response.accessToken}"
             sharedPreferences.token = token
-            val user = gitHubUtils.getUser(token)
+            val user = gitHubUtils.getUser()
 
             Log.d("TAG", "token $token")
-            Log.d("TAG", "user ${user.login}")
             tokenStatus.postValue(TokenStatus.LOADED)
         }
     }
@@ -56,4 +57,15 @@ class LoginViewModel @Inject constructor(
         activity.startActivity(authIntent)
     }
 
+
+    //TODO fix or delete
+    fun clearCookies() {
+        sharedPreferences.token = ""
+        CookieManager.getInstance().setCookie("https://github.com", " ")
+
+        CookieManager.getInstance().flush()
+
+        Log.d("TAG" , CookieManager.getInstance().hasCookies().toString())
+        tokenStatus.postValue(TokenStatus.EMPTY)
+    }
 }

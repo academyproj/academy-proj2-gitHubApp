@@ -2,6 +2,7 @@ package com.example.academy_proj2_githubapp.repository.ui.contributors
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.academy_proj2_githubapp.repository.data.ContributorsService
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
 import com.example.academy_proj2_githubapp.repository.data.models.UserModel
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
@@ -9,7 +10,7 @@ import com.example.academy_proj2_githubapp.shared.async.Result
 import javax.inject.Inject
 
 class ContributorsViewModel @Inject constructor(
-    private val repositoryService: RepositoryService,
+    private val repositoryService: ContributorsService,
     private val multithreading: Multithreading,
 ) : ViewModel() {
 
