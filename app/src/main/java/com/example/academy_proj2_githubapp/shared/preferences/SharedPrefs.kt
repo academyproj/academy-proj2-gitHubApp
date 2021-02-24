@@ -10,6 +10,7 @@ class SharedPrefs @Inject constructor(
 ) {
     companion object {
         const val KEY_TOKEN = "KEY_TOKEN"
+        const val KEY_USERNAME = "KEY_USERNAME"
     }
 
     private val sharedPreferences: SharedPreferences by lazy {
@@ -17,4 +18,5 @@ class SharedPrefs @Inject constructor(
     }
 
     var token: String by ShardePrefDelegate(sharedPreferences, KEY_TOKEN, "")
+    var userLogin: String by ShardePrefDelegate(sharedPreferences, KEY_USERNAME, "")
 }

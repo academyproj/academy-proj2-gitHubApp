@@ -50,6 +50,7 @@ class IssueViewHolder(itemView: CommentView) : RecyclerView.ViewHolder(itemView)
             layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             setUserName(comment.user.login)
             setBodyText(comment.body)
+
             updateReactions(comment.reactions.toMap())
             setAvatar(comment.user.avatarUrl)
         }

@@ -32,7 +32,7 @@ class ExampleUnitTest {
 
         val service = retrofit.create(RepositoryService::class.java)
 
-        val call = service.getIssueDetails("bumptech", "glide", 4501).execute()
+        val call = service.getCommentReactions("NazarDunets", "BasicViews-Dunets-L13", 782849591).execute()
 
         println(call.code())
         println(call.body())
@@ -75,6 +75,7 @@ interface RepositoryService {
         @Path("number") issueNumber: Int,
     ): Call<IssueDetailsMigrationModel>
 
+    @Headers("Accept: application/vnd.github.squirrel-girl-preview+json")
     @GET("repos/{owner}/{repo}/issues/comments/{id}/reactions")
     fun getCommentReactions(
         @Path("owner") owner: String,

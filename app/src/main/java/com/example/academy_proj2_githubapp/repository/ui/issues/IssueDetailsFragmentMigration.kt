@@ -93,7 +93,7 @@ class IssueDetailsFragmentMigration : BaseFragment() {
                 commentsAdapter.submitList(newList)
             }
             is IssueDetailsMigrationViewState.CommentsLoaded -> {
-                val newList = commentsAdapter.currentList + viewState.data
+                val newList = listOf(commentsAdapter.currentList[0]) + viewState.data
                 commentsAdapter.submitList(newList)
             }
             is IssueDetailsMigrationViewState.Error -> {
@@ -107,9 +107,16 @@ class IssueDetailsFragmentMigration : BaseFragment() {
         event.getContentIfNotHandled()?.let {
             when (it) {
                 is ReactionDialogViewState.Ready -> {
-                    navigator.openReactionsDialog(it.data) {}
+                    binding.pbIssueDetailsMigrationLoading.visibility = View.GONE
+                    navigator.openReactionsDialog(it.data) { reaction ->
+                        viewModel.createReaction(reaction)
+                    }
                 }
                 is ReactionDialogViewState.Error -> {
+                    binding.pbIssueDetailsMigrationLoading.visibility = View.GONE
+                }
+                is ReactionDialogViewState.Loading -> {
+                    binding.pbIssueDetailsMigrationLoading.visibility = View.VISIBLE
                 }
                 // TODO do smth on error
             }
@@ -118,7 +125,7 @@ class IssueDetailsFragmentMigration : BaseFragment() {
 
     private fun setupRv() {
         commentsAdapter = IssueCommentsAdapter { commentId ->
-            viewModel.loadCommentReactions(owner, repo, commentId)
+            viewModel.loadCommentReactions(commentId)
         }
         binding.rvIssueComments.apply {
             adapter = commentsAdapter

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GitHubHeadersInterceptor @Inject constructor(private val sharedPrefs: SharedPrefs) :
     Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
-        return if(sharedPrefs.token != "") {
+        return if (sharedPrefs.token != "") {
             proceed(
                 request()
                     .newBuilder()

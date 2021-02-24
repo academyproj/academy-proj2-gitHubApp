@@ -3,8 +3,11 @@ package com.example.academy_proj2_githubapp.repository.data
 import com.example.academy_proj2_githubapp.comments.models.CommentModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionData
 import com.example.academy_proj2_githubapp.repository.data.models.*
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface RepositoryService {
@@ -43,10 +46,16 @@ interface RepositoryService {
         @Path("number") issueNumber: Int,
     ): Call<IssueDetailsMigrationModel>
 
-    @GET("repos/{owner}/{repo}/issues/comments/{id}/reactions")
-    fun getCommentReactions(
+    @POST("repos/{owner}/{repo}/issues/comments/{id}/reactions")
+    fun createIssueCommentReaction(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
-        @Path("id") id: Int
-    ): Call<List<ReactionData>>
+        @Path("id") id: Int,
+        @Body content: ReactionContent
+    ) : Call<ReactionData>
 }
+
+data class ReactionContent(
+    @SerializedName("content")
+    val content: String
+)

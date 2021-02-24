@@ -42,8 +42,8 @@ class ReactionPickerDialog : DialogFragment() {
         )
     }
 
-    lateinit var callback: (ReactionType) -> Unit
-    lateinit var highlightedReactions: List<ReactionType>
+    var callback: (ReactionType) -> Unit = {}
+    var highlightedReactions: List<ReactionType> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,11 +52,6 @@ class ReactionPickerDialog : DialogFragment() {
     ): View {
         _binding = ReactionPickerDialogBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onPause() {
-        super.onPause()
-        dialog?.dismiss()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

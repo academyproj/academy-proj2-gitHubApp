@@ -46,7 +46,7 @@ class LoginViewModel @Inject constructor(
             val token = "${response.tokenType} ${response.accessToken}"
             sharedPreferences.token = token
             val user = gitHubUtils.getUser()
-
+            sharedPreferences.userLogin = user.login
             Log.d("TAG", "token $token")
             tokenStatus.postValue(TokenStatus.LOADED)
         }

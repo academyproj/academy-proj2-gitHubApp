@@ -11,11 +11,11 @@ class ReactionsResultMapper @Inject constructor(
     private val sharedPrefs: SharedPrefs
 ) {
     fun map(result: Result<List<ReactionData>, IssueErrors>): Result<List<ReactionType>, IssueErrors> {
-        // TODO implement this bs
-        val username = "get user name from shared prefs"
+
+        val userLogin = sharedPrefs.userLogin
 
         return result.mapSuccess {
-            it.filter { r -> r.user.login ==  username}.map { reaction ->
+            it.filter { r -> r.user.login ==  userLogin}.map { reaction ->
                 when (reaction.content) {
                     ReactionType.MINUS_ONE.content -> ReactionType.MINUS_ONE
                     ReactionType.PLUS_ONE.content -> ReactionType.PLUS_ONE
