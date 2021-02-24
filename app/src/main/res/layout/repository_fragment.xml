@@ -69,7 +69,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:text="@string/issues"
             android:textSize="16sp" />
 
         <Space
@@ -112,7 +111,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:text="@string/contributors"
             android:textSize="16sp" />
 
     </LinearLayout>

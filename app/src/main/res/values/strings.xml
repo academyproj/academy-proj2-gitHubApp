@@ -10,4 +10,5 @@
     <string name="user_info_not_loaded">Failed to load user info</string>
     <string name="repos_info_not_loaded">Failed to load repos</string>
     <string name="unknown_error">Something went wrong</string>
+    <string name="comments_not_loaded">Failed to load comments</string>
 </resources>
