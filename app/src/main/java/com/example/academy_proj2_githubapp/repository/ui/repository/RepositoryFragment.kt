@@ -11,15 +11,22 @@ import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.RepositoryFragmentBinding
+import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import com.example.academy_proj2_githubapp.repository.ui.contributors.ContributorsFragment
 import com.example.academy_proj2_githubapp.repository.ui.issues.IssuesFragment
 import javax.inject.Inject
 
-class RepositoryFragment : Fragment() {
+class RepositoryFragment : BaseFragment() {
 
     companion object {
-        fun newInstance(): RepositoryFragment {
-            val args = Bundle()
+        private const val KEY_USER = "KEY_USER"
+        private const val KEY_REPO = "KEY_REPO"
+
+        fun newInstance(user: String, repo: String): RepositoryFragment {
+            val args = Bundle().apply {
+                putString(KEY_USER, user)
+                putString(KEY_REPO, repo)
+            }
 
             val fragment = RepositoryFragment()
             fragment.arguments = args
@@ -44,12 +51,20 @@ class RepositoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupListeners()
-        setupObserver()
 
-        //TODO delete
-        viewModel.loadRepo("Alehandrissimus", "buryachenko-proj1-gamescoreapp")
+        setupObserver()
+        val repo = arguments?.getString(KEY_REPO)
+        val owner = arguments?.getString(KEY_USER)
+
+        repo?.let {
+            owner?.let {
+                viewModel.loadRepo(repo = repo, owner = owner)
+                setupListeners(repo = repo, owner = owner)
+            }
+        }
     }
+
+    override val isSearchButtonVisible: Boolean = true
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,20 +76,13 @@ class RepositoryFragment : Fragment() {
         viewModel.repoState.observe(viewLifecycleOwner, ::updateUI)
     }
 
-    private fun setupListeners() {
+    private fun setupListeners(repo: String, owner: String) {
         binding.apply {
             llContributors.setOnClickListener {
-                //TODO navigator
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.flFragmentContainer, ContributorsFragment.newInstance("Alehandrissimus", "buryachenko-proj1-gamescoreapp"))
-                    ?.addToBackStack(null)?.commit()
+                navigator.openContributorsFragment(repo = repo, user = owner)
             }
             llIssues.setOnClickListener {
-                //TODO navigator
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.flFragmentContainer, IssuesFragment.newInstance("Alehandrissimus", "buryachenko-proj1-gamescoreapp"))
-                    ?.addToBackStack(null)?.commit()
-
+                navigator.openIssuesFragment(repo = repo, owner = owner)
             }
         }
     }
@@ -90,21 +98,19 @@ class RepositoryFragment : Fragment() {
                 binding.apply {
                     pbRepository.visibility = View.GONE
 
-                    tvRepoName.text = repoState.data.name
-                    tvRepoUserName.text = repoState.data.owner.login
-                    tvRepoIssuesCount.text = repoState.data.openIssuesCount.toString()
+                    tvRepoName.text = repoState.data.repoName
+                    tvRepoUserName.text = repoState.data.ownerName
+                    tvRepoIssuesCount.text = repoState.data.issuesCount
                     tvRepoReadme.text = repoState.data.readme
+                    tvRepoStarCount.text = repoState.data.starsCount
+                    tvRepoForkCount.text = repoState.data.forksCount
+                    tvRepoDescription.text = repoState.data.repoDescription
 
                     Glide.with(ivRepoUserIcon)
-                        .load(repoState.data.owner.avatarUrl)
+                        .load(repoState.data.ownerIconUrl)
                         .circleCrop()
                         .into(ivRepoUserIcon)
 
-                    if(repoState.data.description != null) {
-                        tvRepoDescription.text = repoState.data.description
-                    } else {
-                        tvRepoDescription.visibility = View.GONE
-                    }
                 }
             }
             is RepoState.RepoError -> {

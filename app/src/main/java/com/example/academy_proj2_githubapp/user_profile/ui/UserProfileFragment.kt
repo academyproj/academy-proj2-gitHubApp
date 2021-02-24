@@ -68,7 +68,7 @@ class UserProfileFragment : BaseFragment() {
     }
 
     private fun setupRv() {
-        reposAdapter = ReposAdapter()
+        reposAdapter = ReposAdapter(::showRepo)
         binding.rvUserRepos.apply {
             adapter = reposAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -105,6 +105,10 @@ class UserProfileFragment : BaseFragment() {
                 Toast.makeText(context, viewState.error, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun showRepo(callback: RepoCallback) {
+        navigator.openRepoFragment(callback.owner, callback.repo)
     }
 
     override fun onDestroyView() {
