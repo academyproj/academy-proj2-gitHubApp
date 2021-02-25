@@ -13,11 +13,30 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
 
-        val dateString = "2020-12-24T06:38:42Z"
+    }
+    private fun setupListener() {
+        val watcher = object :TextWatcher{
+            var searchFor = ""
 
-        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_INSTANT)
-        val formatter = DateTimeFormatter.ofPattern("yyyy MM dd")
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString().trim()
+                if (searchText == searchFor)
+                    return
 
-        println(date.format(formatter))
+                searchFor = searchText
+
+                coroutineScope.launch {
+                    delay(300)
+                    if (searchText != searchFor)
+                        return@launch
+
+                    searchViewModel.searchUsers(searchText)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+        }
+        binding.etSearch.addTextChangedListener(watcher)
     }
 }
