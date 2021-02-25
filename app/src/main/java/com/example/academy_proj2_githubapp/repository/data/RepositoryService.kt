@@ -5,10 +5,7 @@ import com.example.academy_proj2_githubapp.reactions.models.ReactionData
 import com.example.academy_proj2_githubapp.repository.data.models.*
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface RepositoryService {
 
@@ -53,6 +50,20 @@ interface RepositoryService {
         @Path("id") id: Int,
         @Body content: ReactionContent
     ) : Call<ReactionData>
+
+    @GET("repos/{owner}/{repo}/contributors")
+    fun getRepoContributors(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+    ): Call<List<UserModel>>
+
+    @Headers("Accept: application/vnd.github.squirrel-girl-preview+json")
+    @GET("repos/{owner}/{repo}/issues/comments/{id}/reactions")
+    fun getCommentReactions(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+        @Path("id") id: Int
+    ): Call<List<ReactionData>>
 }
 
 data class ReactionContent(

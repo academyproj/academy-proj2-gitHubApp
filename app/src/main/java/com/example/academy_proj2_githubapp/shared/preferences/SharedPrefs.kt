@@ -10,7 +10,6 @@ class SharedPrefs @Inject constructor(
 ) {
     companion object {
         const val KEY_TOKEN = "KEY_TOKEN"
-        const val KEY_REFRESH = "KEY_REFRESH"
         const val KEY_USERNAME = "KEY_USERNAME"
     }
 
@@ -20,6 +19,5 @@ class SharedPrefs @Inject constructor(
 
     var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, "")
 
-    var refreshToken: String by SharedPrefDelegate(sharedPreferences, KEY_REFRESH, "")
     var userLogin: String by SharedPrefDelegate(sharedPreferences, KEY_USERNAME, "")
 }

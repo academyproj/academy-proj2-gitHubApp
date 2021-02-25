@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.ContributorsFragmentBinding
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
 import javax.inject.Inject
 
@@ -97,7 +98,7 @@ class ContributorsFragment : Fragment() {
     //TODO delete swap to issue details
     private fun test(username: String) {
         activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.flFragmentContainer, UserProfileFragment.newInstance(username))
+            ?.replace(R.id.flFragmentContainer, UserProfileFragment.newInstance(UserToLoad.CustomUser(username)))
             ?.addToBackStack(null)?.commit()
     }
 }

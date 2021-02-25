@@ -10,7 +10,7 @@
         android:id="@+id/ivUserProfileAvatar"
         android:layout_width="@dimen/user_profile_avatar_size"
         android:layout_height="@dimen/user_profile_avatar_size"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/user_profile_default_margin"
         android:background="@drawable/avatar_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,20 +46,20 @@
         android:id="@+id/tvUserProfileDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/user_profile_default_margin"
+        android:layout_marginEnd="@dimen/user_profile_default_margin"
         android:maxLines="4"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ivUserProfileAvatar"
         app:layout_constraintTop_toBottomOf="@+id/ivUserProfileAvatar"
-        tools:text="@tools:sample/lorem/random"/>
+        tools:text="@tools:sample/lorem/random" />
 
     <TextView
         android:id="@+id/tvUserProfileJob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/user_profile_default_margin"
         android:drawablePadding="@dimen/default_drawable_padding"
         android:textColor="@color/white"
         android:textSize="@dimen/user_profile_add_info_size"
@@ -100,8 +100,8 @@
     <View
         android:id="@+id/dividerLogin"
         android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/divider_big_height"
+        android:layout_marginTop="@dimen/default_drawable_padding"
         android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/tvUserProfileFollow" />
 

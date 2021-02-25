@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.comments.models.CommentModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionData
 import com.example.academy_proj2_githubapp.reactions.models.ReactionType
-import com.example.academy_proj2_githubapp.repository.data.ContributorsService
 import com.example.academy_proj2_githubapp.repository.data.ReactionContent
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
 import com.example.academy_proj2_githubapp.repository.data.mappers.ReactionsResultMapper
@@ -19,7 +18,6 @@ import javax.inject.Inject
 
 class IssueDetailsViewModelMigration @Inject constructor(
     private val repositoryService: RepositoryService,
-    private val contributorsService: ContributorsService,
     private val multithreading: Multithreading,
     private val reactionsResultMapper: ReactionsResultMapper,
 ) : ViewModel() {
@@ -76,7 +74,7 @@ class IssueDetailsViewModelMigration @Inject constructor(
         val asyncOperation =
             multithreading.async<Result<List<ReactionData>, IssueErrors>> {
 
-                val reactions = contributorsService.getCommentReactions(currentOwner, currentRepo, commentId)
+                val reactions = repositoryService.getCommentReactions(currentOwner, currentRepo, commentId)
                     .execute().body() ?: return@async Result.error(IssueErrors.REACTIONS_NOT_LOADED)
 
                 return@async Result.success(reactions)

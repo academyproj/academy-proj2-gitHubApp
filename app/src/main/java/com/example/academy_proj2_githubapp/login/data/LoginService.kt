@@ -17,6 +17,7 @@ interface LoginService {
         @Field("code") code: String,
     ): AccessToken
 
+    /*
     @Headers("Accept: application/json")
     @POST("login/oauth/access_token")
     @FormUrlEncoded
@@ -26,5 +27,7 @@ interface LoginService {
         @Field("client_id") clientId: String,
         @Field("client_secret") clientSecret: String,
     ): AccessToken
+
+     */
 
 }

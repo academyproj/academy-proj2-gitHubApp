@@ -5,6 +5,7 @@
     android:id="@+id/llRepoItemContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/SelectableItemBackground"
     android:padding="@dimen/rv_item_padding"
     tools:background="@color/bg_gray">
 

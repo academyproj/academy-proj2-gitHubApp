@@ -7,90 +7,79 @@ import android.webkit.CookieManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.login.data.GitHubUtils
+import com.example.academy_proj2_githubapp.login.data.LoginService
+import com.example.academy_proj2_githubapp.login.data.UserService
+import com.example.academy_proj2_githubapp.login.data.models.AccessToken
 import com.example.academy_proj2_githubapp.repository.data.models.UserModel
+import com.example.academy_proj2_githubapp.search.data.models.UsersSearchErrors
+import com.example.academy_proj2_githubapp.search.data.models.UsersSearchResponseData
+import com.example.academy_proj2_githubapp.search.ui.SearchViewModel
+import com.example.academy_proj2_githubapp.search.ui.SearchViewState
+import com.example.academy_proj2_githubapp.shared.async.Multithreading
+import com.example.academy_proj2_githubapp.shared.async.Result
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     private val gitHubUtils: GitHubUtils,
+    private val userService: UserService,
+    private val loginService: LoginService,
+    private val multithreading: Multithreading,
     private val sharedPreferences: SharedPrefs
 ) : ViewModel() {
 
     val tokenStatus = MutableLiveData<LoginViewStatus>()
 
     fun checkForToken(activity: Activity) {
-        Log.d("TAG", "sharedPreferences.token ${sharedPreferences.token} ,  ${sharedPreferences.refreshToken}")
-        if (sharedPreferences.token == "" || sharedPreferences.refreshToken == "") {
+        if (sharedPreferences.token == "") {
             tokenStatus.value = LoginViewStatus.EmptyToken
             loadToken(activity)
         } else {
-            refreshToken()
+            loadUser()
         }
     }
+
+    private val coroutineScope = CoroutineScope(Job())
 
     private fun loadToken(activity: Activity) {
         val code = gitHubUtils.getCodeFromUri(activity.intent.data)
         code ?: return
 
         tokenStatus.value = LoginViewStatus.LoadingToken
-        GlobalScope.launch {
+        coroutineScope.launch {
             val response = gitHubUtils.getAccessToken(code)
             val token = "${response.tokenType} ${response.accessToken}"
             sharedPreferences.token = token
-            val user = gitHubUtils.getUser()
 
             Log.d("TAG", "token ${sharedPreferences.token}")
-
-            tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
+            loadUser()
         }
     }
 
-    private fun refreshToken() {
-        tokenStatus.value = LoginViewStatus.LoadingToken
+    private fun loadUser() {
+        tokenStatus.postValue(LoginViewStatus.LoadingToken)
         GlobalScope.launch {
-            val response = gitHubUtils.refreshToken(sharedPreferences.refreshToken)
-            if(response.refreshToken == null) {
-                tokenStatus.postValue(LoginViewStatus.EmptyToken)
-                return@launch
-            }
-
-            val token = "${response.tokenType} ${response.accessToken}"
-            sharedPreferences.token = token
-            sharedPreferences.refreshToken = response.refreshToken.toString()
-            val user = gitHubUtils.getUser()
-            sharedPreferences.userLogin = user.login
-            Log.d("TAG", "token ${sharedPreferences.token}")
-
-            tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
+            tokenStatus.postValue(LoginViewStatus.LoadedToken(gitHubUtils.getUser()))
         }
     }
-
 
     fun startLogin(activity: Activity) {
         val authIntent = Intent(Intent.ACTION_VIEW, gitHubUtils.buildAuthGitHubUrl())
         activity.startActivity(authIntent)
     }
 
-
-    //TODO fix or delete
     fun clearCookies() {
         sharedPreferences.token = ""
-        sharedPreferences.refreshToken = ""
         CookieManager.getInstance().setCookie("https://github.com", " ")
 
         CookieManager.getInstance().flush()
         tokenStatus.postValue(LoginViewStatus.EmptyToken)
     }
 }
-
-enum class LoginStatus {
-    EMPTY,
-    LOADING,
-    LOADED
-}
-
 
 sealed class LoginViewStatus {
     object EmptyToken : LoginViewStatus()

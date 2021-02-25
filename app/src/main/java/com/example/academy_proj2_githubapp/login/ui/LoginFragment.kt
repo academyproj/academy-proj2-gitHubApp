@@ -2,9 +2,11 @@ package com.example.academy_proj2_githubapp.login.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.LoginFragmentBinding
@@ -74,6 +76,7 @@ class LoginFragment : BaseFragment() {
                     btLogin.visibility = View.VISIBLE
                     btLoginContinue.visibility = View.GONE
                     btLoginLogout.visibility = View.GONE
+                    tvLoginUserName.visibility = View.GONE
                 }
             }
             is LoginViewStatus.LoadedToken -> {
@@ -82,6 +85,7 @@ class LoginFragment : BaseFragment() {
                     btLogin.visibility = View.GONE
                     btLoginContinue.visibility = View.VISIBLE
                     btLoginLogout.visibility = View.VISIBLE
+                    tvLoginUserName.visibility = View.VISIBLE
                     tvLoginUserName.text = getString(R.string.login_name_template, loginViewStatus.user.login)
                 }
             }

@@ -103,7 +103,7 @@
         android:id="@+id/llIssues"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        style="@style/SelectableItemBackground"
         android:orientation="horizontal"
         android:padding="@dimen/repo_standard_margin"
         app:layout_constraintTop_toBottomOf="@+id/view">
@@ -149,7 +149,7 @@
         android:id="@+id/llContributors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        style="@style/SelectableItemBackground"
         android:orientation="horizontal"
         android:padding="@dimen/repo_standard_margin"
         app:layout_constraintTop_toBottomOf="@+id/llIssues">

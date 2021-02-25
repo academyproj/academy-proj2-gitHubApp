@@ -25,7 +25,7 @@ class SearchViewModel @Inject constructor(
     val viewState = MutableLiveData<SearchViewState>()
 
     fun searchUsers(keyword: String) {
-        viewState.value = SearchViewState.SearchLoading
+        viewState.postValue(SearchViewState.SearchLoading)
 
         val asyncOperation =
             multithreading.async<Result<UsersSearchResponseData, UsersSearchErrors>> {

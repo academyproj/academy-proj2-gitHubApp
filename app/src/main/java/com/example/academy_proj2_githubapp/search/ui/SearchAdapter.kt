@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.UserSearchItemBinding
 import com.example.academy_proj2_githubapp.search.data.models.UserFromSearchModel
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 
-class SearchAdapter(private val callback: (String) -> Unit) :
+class SearchAdapter(private val callback: (UserToLoad) -> Unit) :
     ListAdapter<UserFromSearchModel, UserItemViewHolder>(UsersSearchDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserItemViewHolder {
@@ -26,7 +27,7 @@ class SearchAdapter(private val callback: (String) -> Unit) :
     }
 }
 
-class UserItemViewHolder(itemView: View, private val callback: (String) -> Unit) :
+class UserItemViewHolder(itemView: View, private val callback: (UserToLoad) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
 
     private val binding = UserSearchItemBinding.bind(itemView)
@@ -39,7 +40,9 @@ class UserItemViewHolder(itemView: View, private val callback: (String) -> Unit)
             .into(binding.ivUserItemAvatar)
 
         binding.root.setOnClickListener {
-            callback(user.login)
+            callback(
+                UserToLoad.CustomUser(user.login)
+            )
         }
     }
 }

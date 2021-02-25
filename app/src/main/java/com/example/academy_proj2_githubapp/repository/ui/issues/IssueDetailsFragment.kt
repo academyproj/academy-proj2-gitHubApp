@@ -10,9 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
-import com.example.academy_proj2_githubapp.databinding.IssueDetailsFragmentBinding
+import com.example.academy_proj2_githubapp.databinding.IssueDetailsFragmentMigrationBinding
 import javax.inject.Inject
 
+/*
 class IssueDetailsFragment : Fragment() {
 
     companion object {
@@ -33,7 +34,7 @@ class IssueDetailsFragment : Fragment() {
         }
     }
 
-    lateinit var binding: IssueDetailsFragmentBinding
+    lateinit var binding: IssueDetailsFragmentMigrationBinding
     @Inject
     lateinit var viewModel: IssueDetailsViewModel
 
@@ -47,7 +48,7 @@ class IssueDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = IssueDetailsFragmentBinding.inflate(layoutInflater, container, false)
+        binding = IssueDetailsFragmentMigrationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -97,3 +98,5 @@ class IssueDetailsFragment : Fragment() {
     }
 
 }
+
+ */

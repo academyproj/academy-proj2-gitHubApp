@@ -5,11 +5,13 @@ import android.util.Log
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
 import com.example.academy_proj2_githubapp.login.data.models.User
 import com.example.academy_proj2_githubapp.repository.data.models.UserModel
+import com.example.academy_proj2_githubapp.shared.async.Result
+import retrofit2.Call
 import javax.inject.Inject
 
 class GitHubUtils @Inject constructor(
     private val loginService: LoginService,
-    private val userService: UserService
+    private val userService: UserService,
 ) {
 
     private companion object {
@@ -45,12 +47,8 @@ class GitHubUtils @Inject constructor(
         return loginService.getAccessToken(clientId, clientSecret, code)
     }
 
+
     suspend fun getUser(): UserModel {
         return userService.getUser()
     }
-
-    suspend fun refreshToken(refreshToken: String): AccessToken {
-        return loginService.refreshToken(refreshToken, "refresh_token", clientId, clientSecret)
-    }
-
 }

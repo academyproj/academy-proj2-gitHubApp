@@ -6,8 +6,11 @@ data class AccessToken(
     @SerializedName("access_token")
     val accessToken: String,
 
+    /*
     @SerializedName("refresh_token")
     val refreshToken: String?,
+
+     */
 
     @SerializedName("scope")
     val scope: String,
