@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:padding="@dimen/default_screen_edge_padding">
+    android:background="@color/bg_gray">
 
     <ImageView
         android:id="@+id/ivUserProfileAvatar"
         android:layout_width="@dimen/user_profile_avatar_size"
         android:layout_height="@dimen/user_profile_avatar_size"
+        android:layout_margin="16dp"
         android:background="@drawable/avatar_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,17 +43,30 @@
         tools:text="UserLogin" />
 
     <TextView
+        android:id="@+id/tvUserProfileDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="4"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivUserProfileAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserProfileAvatar"
+        tools:text="@tools:sample/lorem/random"/>
+
+    <TextView
         android:id="@+id/tvUserProfileJob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/user_profile_sections_margin"
+        android:layout_marginTop="14dp"
         android:drawablePadding="@dimen/default_drawable_padding"
         android:textColor="@color/white"
         android:textSize="@dimen/user_profile_add_info_size"
         app:drawableStartCompat="@drawable/ic_baseline_work_outline_24"
         app:drawableTint="@color/fg_gray"
         app:layout_constraintStart_toStartOf="@id/ivUserProfileAvatar"
-        app:layout_constraintTop_toBottomOf="@id/ivUserProfileAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserProfileDescription"
         tools:text="Parimatch" />
 
     <TextView
@@ -70,16 +83,37 @@
         app:layout_constraintTop_toBottomOf="@id/tvUserProfileJob"
         tools:text="Ukraine" />
 
+    <TextView
+        android:id="@+id/tvUserProfileFollow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/user_profile_sections_margin"
+        android:drawablePadding="@dimen/default_drawable_padding"
+        android:textColor="@color/white"
+        android:textSize="@dimen/user_profile_add_info_size"
+        app:drawableStartCompat="@drawable/ic_baseline_people_outline_24"
+        app:drawableTint="@color/fg_gray"
+        app:layout_constraintStart_toStartOf="@+id/tvUserProfileLocation"
+        app:layout_constraintTop_toBottomOf="@id/tvUserProfileLocation"
+        tools:text="Followers" />
+
+    <View
+        android:id="@+id/dividerLogin"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserProfileFollow" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUserRepos"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/user_profile_sections_margin"
         android:background="@color/bg_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUserProfileLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerLogin" />
 
     <ProgressBar
         android:id="@+id/pbUserInfoLoading"

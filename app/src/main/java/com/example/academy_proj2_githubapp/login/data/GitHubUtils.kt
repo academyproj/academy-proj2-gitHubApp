@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
 import com.example.academy_proj2_githubapp.login.data.models.User
+import com.example.academy_proj2_githubapp.repository.data.models.UserModel
 import javax.inject.Inject
 
 class GitHubUtils @Inject constructor(
@@ -15,7 +16,7 @@ class GitHubUtils @Inject constructor(
         const val clientId = "Iv1.285bc9168541e271"
         const val clientSecret = "22b361ae6e2b0e23ec3edbb4e39eb89bceedce63"
         const val redirectUrl = "academy-proj2-githubapp://callback"
-        const val scopes = "repo, user"
+        const val scopes = "repo"
         const val schema = "https"
         const val host = "github.com"
     }
@@ -27,7 +28,7 @@ class GitHubUtils @Inject constructor(
             .authority(host)
             .appendEncodedPath("login/oauth/authorize")
             .appendQueryParameter("client_id", clientId)
-            .appendQueryParameter("scope", scopes)
+            .appendQueryParameter("scope", "repo")
             .appendQueryParameter("redirect_url", redirectUrl)
             .build()
     }
@@ -44,8 +45,12 @@ class GitHubUtils @Inject constructor(
         return loginService.getAccessToken(clientId, clientSecret, code)
     }
 
-    suspend fun getUser(): User {
+    suspend fun getUser(): UserModel {
         return userService.getUser()
+    }
+
+    suspend fun refreshToken(refreshToken: String): AccessToken {
+        return loginService.refreshToken(refreshToken, "refresh_token", clientId, clientSecret)
     }
 
 }

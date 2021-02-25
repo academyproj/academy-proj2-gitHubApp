@@ -12,12 +12,13 @@
         android:layout_width="@dimen/login_image_size"
         android:layout_height="@dimen/login_image_size"
         android:src="@drawable/login_octocat"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvLoginUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLoginUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
@@ -36,18 +37,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivOctocat" />
+        app:layout_constraintTop_toBottomOf="@id/tvLoginUserName" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btLoginContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/continueLogin"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivOctocat" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginUserName" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btLoginLogout"

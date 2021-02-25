@@ -5,6 +5,8 @@ import com.example.academy_proj2_githubapp.login.data.LoginService
 import com.example.academy_proj2_githubapp.login.data.UserService
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -32,6 +34,11 @@ class LoginModule {
     @Named("githubLogin")
     fun provideGitHubRetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
+            .client(
+                OkHttpClient().newBuilder()
+                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .build()
+            )
             .baseUrl("https://github.com/")
             .addConverterFactory(gsonConverterFactory)
             .build()

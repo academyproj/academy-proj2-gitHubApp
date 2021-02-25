@@ -18,4 +18,6 @@
     <string name="fork_count_template">%d fork</string>
     <string name="forks_count_template">%d forks</string>
     <string name="logout">Logout</string>
+    <string name="login_name_template">Logged in as %s</string>
+    <string name="login_follow_template">%d followers • %d following</string>
 </resources>

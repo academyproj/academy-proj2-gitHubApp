@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
+import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.UserProfileFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
@@ -93,6 +94,13 @@ class UserProfileFragment : BaseFragment() {
                     tvUserProfileLogin.text = viewState.data.login
                     tvUserProfileLocation.text = viewState.data.location
                     tvUserProfileJob.text = viewState.data.company
+                    tvUserProfileFollow.text = viewState.data.follow
+
+                    if(viewState.data.bio != "") {
+                        tvUserProfileDescription.text = viewState.data.bio
+                    } else {
+                        tvUserProfileDescription.visibility = View.GONE
+                    }
                 }
                 Glide.with(binding.ivUserProfileAvatar)
                     .load(viewState.data.avatarUrl)
@@ -110,7 +118,7 @@ class UserProfileFragment : BaseFragment() {
         }
     }
 
-    fun showRepo(callback: RepoCallback) {
+    private fun showRepo(callback: RepoCallback) {
         navigator.openRepoFragment(callback.owner, callback.repo)
     }
 
