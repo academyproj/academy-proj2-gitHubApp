@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="academy-proj2-githubapp"
+                    android:scheme="academyproj2"
                     android:host="callback" />
             </intent-filter>
         </activity>

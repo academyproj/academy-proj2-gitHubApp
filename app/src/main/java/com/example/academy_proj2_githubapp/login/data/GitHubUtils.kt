@@ -13,10 +13,10 @@ class GitHubUtils @Inject constructor(
 ) {
 
     private companion object {
-        const val clientId = "Iv1.285bc9168541e271"
-        const val clientSecret = "22b361ae6e2b0e23ec3edbb4e39eb89bceedce63"
-        const val redirectUrl = "academy-proj2-githubapp://callback"
-        const val scopes = "repo"
+        const val clientId = "81e826e2d9913602fa7a"
+        const val clientSecret = "6229190ecdc9fed61890e17e72d5d2c295408d96"
+        const val redirectUrl = "academyproj2://callback"
+        const val scopes = "user, repo"
         const val schema = "https"
         const val host = "github.com"
     }
@@ -28,7 +28,7 @@ class GitHubUtils @Inject constructor(
             .authority(host)
             .appendEncodedPath("login/oauth/authorize")
             .appendQueryParameter("client_id", clientId)
-            .appendQueryParameter("scope", "repo")
+            .appendQueryParameter("scope", scopes)
             .appendQueryParameter("redirect_url", redirectUrl)
             .build()
     }
@@ -47,10 +47,6 @@ class GitHubUtils @Inject constructor(
 
     suspend fun getUser(): UserModel {
         return userService.getUser()
-    }
-
-    suspend fun refreshToken(refreshToken: String): AccessToken {
-        return loginService.refreshToken(refreshToken, "refresh_token", clientId, clientSecret)
     }
 
 }

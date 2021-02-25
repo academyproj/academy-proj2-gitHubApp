@@ -11,7 +11,6 @@ import com.example.academy_proj2_githubapp.repository.data.models.UserModel
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
@@ -39,7 +38,6 @@ class LoginViewModel @Inject constructor(
             val response = gitHubUtils.getAccessToken(code)
             val token = "${response.tokenType} ${response.accessToken}"
             sharedPreferences.token = token
-            sharedPreferences.refreshToken = response.refreshToken
             val user = gitHubUtils.getUser()
 
             Log.d("TAG", "token ${sharedPreferences.token}")
