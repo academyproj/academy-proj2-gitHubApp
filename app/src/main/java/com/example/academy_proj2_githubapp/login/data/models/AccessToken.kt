@@ -7,7 +7,7 @@ data class AccessToken(
     val accessToken: String,
 
     @SerializedName("refresh_token")
-    val refreshToken: String,
+    val refreshToken: String?,
 
     @SerializedName("scope")
     val scope: String,

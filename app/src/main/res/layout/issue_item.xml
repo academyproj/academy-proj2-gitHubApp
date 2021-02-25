@@ -8,16 +8,16 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="12dp"
+        android:layout_width="@dimen/issue_icon"
+        android:layout_height="@dimen/issue_icon"
+        android:layout_margin="@dimen/issue_margin"
         android:src="@drawable/ic_baseline_error_outline_24" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="@dimen/issue_margin"
+        android:layout_marginBottom="@dimen/issue_margin"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -32,10 +32,10 @@
             android:id="@+id/tvIssuesItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/issue_margin"
             android:maxLines="2"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/issue_textsize_medium"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
 
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/issue_margin"
         tools:text="time" />
 
 </LinearLayout>
