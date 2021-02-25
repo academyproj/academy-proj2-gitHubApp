@@ -60,7 +60,9 @@ class LoginViewModel @Inject constructor(
     private fun loadUser() {
         tokenStatus.postValue(LoginViewStatus.LoadingToken)
         GlobalScope.launch {
-            tokenStatus.postValue(LoginViewStatus.LoadedToken(gitHubUtils.getUser()))
+            val user = gitHubUtils.getUser()
+            tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
+            sharedPreferences.userLogin = user.login
         }
     }
 
