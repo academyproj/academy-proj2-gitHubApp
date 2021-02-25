@@ -18,8 +18,8 @@ class SharedPrefs @Inject constructor(
         context.getSharedPreferences("preferences", MODE_PRIVATE)
     }
 
-    var token: String by ShardePrefDelegate(sharedPreferences, KEY_TOKEN, "")
+    var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, "")
 
-    var refreshToken: String by ShardePrefDelegate(sharedPreferences, KEY_REFRESH, "")
-    var userLogin: String by ShardePrefDelegate(sharedPreferences, KEY_USERNAME, "")
+    var refreshToken: String by SharedPrefDelegate(sharedPreferences, KEY_REFRESH, "")
+    var userLogin: String by SharedPrefDelegate(sharedPreferences, KEY_USERNAME, "")
 }
