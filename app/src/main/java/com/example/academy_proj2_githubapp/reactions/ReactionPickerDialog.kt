@@ -59,7 +59,7 @@ class ReactionPickerDialog : DialogFragment() {
         reactionViews.keys.forEach { reactionView ->
             if (reactionViews[reactionView] in highlightedReactions) {
                 reactionView.background =
-                    ContextCompat.getDrawable(requireContext(), R.color.purple_200)
+                    ContextCompat.getDrawable(requireContext(), R.drawable.active_reaction_bg)
             }
             reactionView.setOnClickListener {
                 callback(reactionViews[it] ?: ReactionType.UNDEFINED)
