@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="@id/ibAddCommentReactionMigrate">
 
         <LinearLayout
-            android:id="@+id/llCommentReactionsMigrage"
+            android:id="@+id/llCommentReactionsMigrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />

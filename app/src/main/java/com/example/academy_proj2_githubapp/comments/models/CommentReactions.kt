@@ -27,7 +27,7 @@ data class CommentReactions(
     val minusOne: Int
 )
 
-fun CommentReactions.toMap(): HashMap<ReactionType, Int>{
+fun CommentReactions.toMap(): HashMap<ReactionType, Int> {
     return hashMapOf(
         ReactionType.CONFUSED to confused,
         ReactionType.EYES to eyes,

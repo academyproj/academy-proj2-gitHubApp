@@ -21,7 +21,10 @@ class LoginViewModel @Inject constructor(
     val tokenStatus = MutableLiveData<LoginViewStatus>()
 
     fun checkForToken(activity: Activity) {
-        Log.d("TAG", "sharedPreferences.token ${sharedPreferences.token} ,  ${sharedPreferences.refreshToken}")
+        Log.d(
+            "TAG",
+            "sharedPreferences.token ${sharedPreferences.token} ,  ${sharedPreferences.refreshToken}"
+        )
         if (sharedPreferences.token == "" || sharedPreferences.refreshToken == "") {
             tokenStatus.value = LoginViewStatus.EmptyToken
             loadToken(activity)
@@ -51,7 +54,7 @@ class LoginViewModel @Inject constructor(
         tokenStatus.value = LoginViewStatus.LoadingToken
         GlobalScope.launch {
             val response = gitHubUtils.refreshToken(sharedPreferences.refreshToken)
-            if(response.refreshToken == null) {
+            if (response.refreshToken == null) {
                 tokenStatus.postValue(LoginViewStatus.EmptyToken)
                 return@launch
             }

@@ -1,9 +1,7 @@
 package com.example.academy_proj2_githubapp.login.data
 
 import android.net.Uri
-import android.util.Log
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
-import com.example.academy_proj2_githubapp.login.data.models.User
 import com.example.academy_proj2_githubapp.repository.data.models.UserModel
 import javax.inject.Inject
 

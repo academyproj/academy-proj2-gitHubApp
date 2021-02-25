@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
-import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.UserProfileFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
@@ -96,7 +95,7 @@ class UserProfileFragment : BaseFragment() {
                     tvUserProfileJob.text = viewState.data.company
                     tvUserProfileFollow.text = viewState.data.follow
 
-                    if(viewState.data.bio != "") {
+                    if (viewState.data.bio != "") {
                         tvUserProfileDescription.text = viewState.data.bio
                     } else {
                         tvUserProfileDescription.visibility = View.GONE

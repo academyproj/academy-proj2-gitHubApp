@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -66,7 +67,9 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun setupRv() {
-        searchAdapter = SearchAdapter(navigator::openProfileFragment)
+        searchAdapter = SearchAdapter {
+            navigator.openProfileFragment(UserToLoad.CustomUser(it))
+        }
         binding.rvSearchResults.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = searchAdapter

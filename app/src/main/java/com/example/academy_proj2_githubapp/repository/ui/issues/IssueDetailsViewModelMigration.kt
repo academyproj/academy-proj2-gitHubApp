@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.comments.models.CommentModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionData
+import com.example.academy_proj2_githubapp.reactions.models.ReactionModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionType
-import com.example.academy_proj2_githubapp.repository.data.ContributorsService
 import com.example.academy_proj2_githubapp.repository.data.ReactionContent
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
 import com.example.academy_proj2_githubapp.repository.data.mappers.ReactionsResultMapper
@@ -19,7 +19,6 @@ import javax.inject.Inject
 
 class IssueDetailsViewModelMigration @Inject constructor(
     private val repositoryService: RepositoryService,
-    private val contributorsService: ContributorsService,
     private val multithreading: Multithreading,
     private val reactionsResultMapper: ReactionsResultMapper,
 ) : ViewModel() {
@@ -31,6 +30,7 @@ class IssueDetailsViewModelMigration @Inject constructor(
     private var currentRepo: String = ""
     private var currentIssue: Int = -1
     private var currentComment: Int = -1
+    private var currentActiveReactions: List<ReactionModel> = emptyList()
 
     fun loadIssue(owner: String, repo: String, issueId: Int) {
         viewState.value = IssueDetailsMigrationViewState.Loading
@@ -59,8 +59,9 @@ class IssueDetailsViewModelMigration @Inject constructor(
     private fun loadComments() {
         multithreading.async<Result<List<CommentModel>, IssueErrors>> {
 
-            val comments = repositoryService.getRepoIssueComments(currentOwner, currentRepo, currentIssue)
-                .execute().body() ?: return@async Result.error(IssueErrors.COMMENTS_NOT_LOADED)
+            val comments =
+                repositoryService.getRepoIssueComments(currentOwner, currentRepo, currentIssue)
+                    .execute().body() ?: return@async Result.error(IssueErrors.COMMENTS_NOT_LOADED)
 
             return@async Result.success(comments)
         }.postOnMainThread {
@@ -76,22 +77,28 @@ class IssueDetailsViewModelMigration @Inject constructor(
         val asyncOperation =
             multithreading.async<Result<List<ReactionData>, IssueErrors>> {
 
-                val reactions = contributorsService.getCommentReactions(currentOwner, currentRepo, commentId)
-                    .execute().body() ?: return@async Result.error(IssueErrors.REACTIONS_NOT_LOADED)
+                val reactions =
+                    repositoryService.getCommentReactions(currentOwner, currentRepo, commentId)
+                        .execute().body()
+                        ?: return@async Result.error(IssueErrors.REACTIONS_NOT_LOADED)
 
                 return@async Result.success(reactions)
             }
 
         asyncOperation
             .map(reactionsResultMapper::map)
-            .postOnMainThread {
-                val data = if (it.isError) ReactionDialogViewState.Error(it.errorResult)
-                else ReactionDialogViewState.Ready(it.successResult)
+            .postOnMainThread { result ->
+                val data = if (result.isError) {
+                    ReactionDialogViewState.Error(result.errorResult)
+                } else {
+                    currentActiveReactions = result.successResult
+                    ReactionDialogViewState.Ready(currentActiveReactions.map { it.type })
+                }
                 dialogEvent.value = Event(data)
             }
     }
 
-    fun createReaction(reaction: ReactionType) {
+    private fun createReaction(reaction: ReactionType) {
         multithreading.async {
             repositoryService.createIssueCommentReaction(
                 currentOwner,
@@ -100,7 +107,32 @@ class IssueDetailsViewModelMigration @Inject constructor(
                 ReactionContent(reaction.content)
             ).execute()
         }.postOnMainThread {
-           loadComments()
+            loadComments()
+        }
+    }
+
+    fun onReactionChosen(reaction: ReactionType) {
+        val reactionId = currentActiveReactions
+            .firstOrNull { it.type == reaction }?.id
+
+        reactionId?.let {
+            deleteReactionById(it)
+            return
+        }
+
+        createReaction(reaction)
+    }
+
+    private fun deleteReactionById(reactionId: Int) {
+        multithreading.async {
+            repositoryService.deleteCommentReaction(
+                currentOwner,
+                currentRepo,
+                currentComment,
+                reactionId
+            ).execute()
+        }.postOnMainThread {
+            loadComments()
         }
     }
 }

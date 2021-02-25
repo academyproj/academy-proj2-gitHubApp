@@ -82,7 +82,8 @@ class LoginFragment : BaseFragment() {
                     btLogin.visibility = View.GONE
                     btLoginContinue.visibility = View.VISIBLE
                     btLoginLogout.visibility = View.VISIBLE
-                    tvLoginUserName.text = getString(R.string.login_name_template, loginViewStatus.user.login)
+                    tvLoginUserName.text =
+                        getString(R.string.login_name_template, loginViewStatus.user.login)
                 }
             }
             is LoginViewStatus.LoadingToken -> {

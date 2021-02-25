@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.Base64
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.repository.data.models.RepositoryModel
-import com.example.academy_proj2_githubapp.repository.data.models.RepositoryReadmeModel
 import com.example.academy_proj2_githubapp.repository.data.models.RepositoryUiModel
-import com.example.academy_proj2_githubapp.shared.async.Result
 import javax.inject.Inject
 
 class RepoToUiMapper @Inject constructor(

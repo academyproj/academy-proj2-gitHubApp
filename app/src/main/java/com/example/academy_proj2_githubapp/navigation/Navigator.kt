@@ -1,4 +1,3 @@
-
 package com.example.academy_proj2_githubapp.navigation
 
 import androidx.annotation.IdRes
@@ -49,14 +48,20 @@ class Navigator(
 
     fun openContributorsFragment(user: String, repo: String) {
         fragmentManager.beginTransaction()
-            .replace(R.id.flFragmentContainer, ContributorsFragment.newInstance(repo = repo, owner = user))
+            .replace(
+                R.id.flFragmentContainer,
+                ContributorsFragment.newInstance(repo = repo, owner = user)
+            )
             .addToBackStack(null)
             .commit()
     }
 
     fun openIssuesFragment(repo: String, owner: String) {
         fragmentManager.beginTransaction()
-            .replace(R.id.flFragmentContainer, IssuesFragment.newInstance(repo = repo, owner = owner))
+            .replace(
+                R.id.flFragmentContainer,
+                IssuesFragment.newInstance(repo = repo, owner = owner)
+            )
             .addToBackStack(null)
             .commit()
     }
