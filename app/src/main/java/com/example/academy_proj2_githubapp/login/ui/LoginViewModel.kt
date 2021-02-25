@@ -2,6 +2,7 @@ package com.example.academy_proj2_githubapp.login.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.webkit.CookieManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,9 +49,13 @@ class LoginViewModel @Inject constructor(
     private fun loadUser() {
         tokenStatus.postValue(LoginViewStatus.LoadingToken)
         GlobalScope.launch {
-            val user = gitHubUtils.getUser()
-            tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
-            sharedPreferences.userLogin = user.login
+            try {
+                val user = gitHubUtils.getUser()
+                tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
+                sharedPreferences.userLogin = user.login
+            } catch(e: Exception){
+                clearCookies()
+            }
         }
     }
 
