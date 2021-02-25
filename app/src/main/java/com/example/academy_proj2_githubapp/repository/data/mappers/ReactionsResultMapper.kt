@@ -1,7 +1,6 @@
 package com.example.academy_proj2_githubapp.repository.data.mappers
 
 import com.example.academy_proj2_githubapp.reactions.models.ReactionData
-import com.example.academy_proj2_githubapp.reactions.models.ReactionErrors
 import com.example.academy_proj2_githubapp.reactions.models.ReactionModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionType
 import com.example.academy_proj2_githubapp.repository.data.models.IssueErrors
@@ -12,7 +11,7 @@ import javax.inject.Inject
 class ReactionsResultMapper @Inject constructor(
     private val sharedPrefs: SharedPrefs
 ) {
-    fun map(result: Result<List<ReactionData>, IssueErrors>) : Result<List<ReactionModel>, IssueErrors> {
+    fun map(result: Result<List<ReactionData>, IssueErrors>): Result<List<ReactionModel>, IssueErrors> {
         val userLogin = sharedPrefs.userLogin
 
         return result.mapSuccess {

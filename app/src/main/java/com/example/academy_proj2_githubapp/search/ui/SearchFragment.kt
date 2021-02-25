@@ -4,26 +4,19 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
-import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class SearchFragment : BaseFragment() {
 
@@ -65,7 +58,7 @@ class SearchFragment : BaseFragment() {
     private val coroutineScope = CoroutineScope(Job())
 
     private fun setupListener() {
-        val watcher = object :TextWatcher{
+        val watcher = object : TextWatcher {
             var searchFor = ""
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -80,12 +73,15 @@ class SearchFragment : BaseFragment() {
                     if (searchText != searchFor)
                         return@launch
 
-                    searchViewModel.searchUsers(searchText)
+                    if(searchText.isNotEmpty()) {
+                        searchViewModel.searchUsers(searchText)
+                    }
                 }
             }
 
             override fun afterTextChanged(s: Editable?) = Unit
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
         }
         binding.etSearch.addTextChangedListener(watcher)
     }

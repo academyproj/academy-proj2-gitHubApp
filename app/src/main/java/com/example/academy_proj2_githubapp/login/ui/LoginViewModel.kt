@@ -7,16 +7,7 @@ import android.webkit.CookieManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.login.data.GitHubUtils
-import com.example.academy_proj2_githubapp.login.data.LoginService
-import com.example.academy_proj2_githubapp.login.data.UserService
-import com.example.academy_proj2_githubapp.login.data.models.AccessToken
 import com.example.academy_proj2_githubapp.repository.data.models.UserModel
-import com.example.academy_proj2_githubapp.search.data.models.UsersSearchErrors
-import com.example.academy_proj2_githubapp.search.data.models.UsersSearchResponseData
-import com.example.academy_proj2_githubapp.search.ui.SearchViewModel
-import com.example.academy_proj2_githubapp.search.ui.SearchViewState
-import com.example.academy_proj2_githubapp.shared.async.Multithreading
-import com.example.academy_proj2_githubapp.shared.async.Result
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope

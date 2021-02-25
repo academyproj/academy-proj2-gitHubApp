@@ -1,6 +1,5 @@
 package com.example.academy_proj2_githubapp.repository.ui.issues
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.comments.models.CommentModel

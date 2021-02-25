@@ -3,8 +3,6 @@ package com.example.academy_proj2_githubapp.login.data
 import android.net.Uri
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
 import com.example.academy_proj2_githubapp.repository.data.models.UserModel
-import com.example.academy_proj2_githubapp.shared.async.Result
-import retrofit2.Call
 import javax.inject.Inject
 
 class GitHubUtils @Inject constructor(

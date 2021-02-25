@@ -9,10 +9,6 @@ data class User(
     @Expose
     val login: String,
 
-    @SerializedName("id")
-    @Expose
-    val id: Int,
-
     @SerializedName("avatar_url")
     @Expose
     val avatarUrl: String,

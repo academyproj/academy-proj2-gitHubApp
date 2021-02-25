@@ -16,18 +16,4 @@ interface LoginService {
         @Field("client_secret") clientSecret: String,
         @Field("code") code: String,
     ): AccessToken
-
-    /*
-    @Headers("Accept: application/json")
-    @POST("login/oauth/access_token")
-    @FormUrlEncoded
-    suspend fun refreshToken(
-        @Field("refresh_token") refreshToken: String,
-        @Field("grant_type") type: String,
-        @Field("client_id") clientId: String,
-        @Field("client_secret") clientSecret: String,
-    ): AccessToken
-
-     */
-
 }
