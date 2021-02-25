@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.search.data.api.SearchUsersService
 import com.example.academy_proj2_githubapp.search.data.mappers.UsersSearchMapper
-import com.example.academy_proj2_githubapp.search.data.models.UserFromSearchModel
 import com.example.academy_proj2_githubapp.search.data.models.UsersSearchErrors
 import com.example.academy_proj2_githubapp.search.data.models.UsersSearchResponseData
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import com.example.academy_proj2_githubapp.shared.async.Result
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -39,7 +39,7 @@ class SearchViewModel @Inject constructor(
             .postOnMainThread(::showResult)
     }
 
-    private fun showResult(result: Result<List<UserFromSearchModel>, String>) {
+    private fun showResult(result: Result<List<UserInfoModel>, String>) {
         viewState.value = if (result.isError)
             SearchViewState.SearchFailed(result.errorResult)
         else
@@ -50,6 +50,6 @@ class SearchViewModel @Inject constructor(
 
 sealed class SearchViewState {
     object SearchLoading : SearchViewState()
-    data class SearchSuccess(val data: List<UserFromSearchModel>) : SearchViewState()
+    data class SearchSuccess(val data: List<UserInfoModel>) : SearchViewState()
     data class SearchFailed(val error: String) : SearchViewState()
 }

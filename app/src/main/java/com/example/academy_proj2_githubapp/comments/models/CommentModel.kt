@@ -1,7 +1,7 @@
 package com.example.academy_proj2_githubapp.comments.models
 
 
-import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoModel
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.google.gson.annotations.SerializedName
 
 data class CommentModel(

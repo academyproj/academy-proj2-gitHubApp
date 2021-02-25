@@ -1,4 +1,4 @@
-package com.example.academy_proj2_githubapp.user_profile.data.models
+package com.example.academy_proj2_githubapp.shared.models
 
 import com.google.gson.annotations.SerializedName
 

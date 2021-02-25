@@ -34,6 +34,8 @@ class RepositoryFragment : BaseFragment() {
 
     lateinit var binding: RepositoryFragmentBinding
 
+    private var repo: String = ""
+    private var owner: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,14 +50,12 @@ class RepositoryFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupObserver()
-        val repo = arguments?.getString(KEY_REPO)
-        val owner = arguments?.getString(KEY_USER)
 
-        repo?.let {
-            owner?.let {
-                viewModel.loadRepo(repo = repo, owner = owner)
-                setupListeners(repo = repo, owner = owner)
-            }
+        arguments?.let {
+            repo = it.getString(KEY_REPO, "")
+            owner = it.getString(KEY_USER, "")
+            viewModel.loadRepo(repo = repo, owner = owner)
+            setupListeners(repo = repo, owner = owner)
         }
     }
 

@@ -40,6 +40,9 @@ class ContributorsFragment : Fragment() {
     lateinit var viewModel: ContributorsViewModel
     private lateinit var contributorsAdapter: ContributorsRVAdapter
 
+    private var repo: String = ""
+    private var owner: String = ""
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context.applicationContext as AppApplication).appComponent.inject(this)
@@ -59,10 +62,10 @@ class ContributorsFragment : Fragment() {
         setupRv()
         setupObserver()
 
-        arguments?.getString(KEY_OWNER, "")?.let { owner ->
-            arguments?.getString(KEY_REPO, "")?.let { repo ->
-                viewModel.getContributors(owner, repo)
-            }
+        arguments?.let {
+            repo = it.getString(KEY_REPO, "")
+            owner = it.getString(KEY_OWNER, "")
+            viewModel.getContributors(owner, repo)
         }
     }
 

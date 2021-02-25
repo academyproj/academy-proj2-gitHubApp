@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.IssueItemBinding
-import com.example.academy_proj2_githubapp.repository.data.models.IssueModel
+import com.example.academy_proj2_githubapp.repository.data.models.IssueDetailsMigrationModel
 
 class IssuesRVAdapter(private val callback: (IssueCallbackModel) -> Unit) :
-    ListAdapter<IssueModel, IssuesViewHolder>(IssuesDiffCallback()) {
+    ListAdapter<IssueDetailsMigrationModel, IssuesViewHolder>(IssuesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssuesViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -31,7 +31,7 @@ class IssuesViewHolder(itemView: View, private val callback: (IssueCallbackModel
 
     private val binding = IssueItemBinding.bind(itemView)
 
-    fun bind(issue: IssueModel) {
+    fun bind(issue: IssueDetailsMigrationModel) {
         binding.tvIssuesItemName.text = issue.user.login
         binding.tvIssuesItemTitle.text = issue.title
 
@@ -47,17 +47,17 @@ class IssuesViewHolder(itemView: View, private val callback: (IssueCallbackModel
     }
 }
 
-class IssuesDiffCallback : DiffUtil.ItemCallback<IssueModel>() {
+class IssuesDiffCallback : DiffUtil.ItemCallback<IssueDetailsMigrationModel>() {
     override fun areItemsTheSame(
-        oldItem: IssueModel,
-        newItem: IssueModel
+        oldItem: IssueDetailsMigrationModel,
+        newItem: IssueDetailsMigrationModel
     ): Boolean {
         return oldItem == newItem
     }
 
     override fun areContentsTheSame(
-        oldItem: IssueModel,
-        newItem: IssueModel
+        oldItem: IssueDetailsMigrationModel,
+        newItem: IssueDetailsMigrationModel
     ): Boolean {
         return oldItem == newItem
     }

@@ -2,7 +2,7 @@ package com.example.academy_proj2_githubapp.login.data
 
 import android.net.Uri
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
-import com.example.academy_proj2_githubapp.repository.data.models.UserModel
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import javax.inject.Inject
 
 class GitHubUtils @Inject constructor(
@@ -44,7 +44,7 @@ class GitHubUtils @Inject constructor(
     }
 
 
-    suspend fun getUser(): UserModel {
+    suspend fun getUser(): UserInfoModel {
         return userService.getUser()
     }
 }

@@ -1,6 +1,6 @@
 package com.example.academy_proj2_githubapp.reactions.models
 
-import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoModel
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 
 data class ReactionModel(
     val id: Int,

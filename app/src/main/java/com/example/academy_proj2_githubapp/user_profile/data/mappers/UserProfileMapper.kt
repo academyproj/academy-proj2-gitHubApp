@@ -3,8 +3,8 @@ package com.example.academy_proj2_githubapp.user_profile.data.mappers
 import android.content.Context
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.shared.async.Result
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoErrors
-import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoModel
 import javax.inject.Inject
 
 class UserProfileMapper @Inject constructor(private val context: Context) {

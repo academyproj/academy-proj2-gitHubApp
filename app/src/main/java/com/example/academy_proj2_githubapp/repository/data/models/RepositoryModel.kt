@@ -1,5 +1,6 @@
 package com.example.academy_proj2_githubapp.repository.data.models
 
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.google.gson.annotations.SerializedName
 
 data class RepositoryModel(
@@ -12,7 +13,7 @@ data class RepositoryModel(
     val name: String,
 
     @SerializedName("owner")
-    val owner: UserModel,
+    val owner: UserInfoModel,
 
     @SerializedName("html_url")
     val htmlUrl: String,
