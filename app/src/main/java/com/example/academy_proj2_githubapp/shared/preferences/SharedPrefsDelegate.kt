@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class ShardePrefDelegate<T>(
+class SharedPrefDelegate<T>(
     private val sharedPreferences: SharedPreferences,
     private val key: String,
     private val defValue: T,

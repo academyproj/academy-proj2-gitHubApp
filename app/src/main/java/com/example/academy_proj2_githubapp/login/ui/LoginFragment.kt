@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.academy_proj2_githubapp.AppApplication
+import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.LoginFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -53,7 +55,10 @@ class LoginFragment : BaseFragment() {
             loginViewModel.startLogin(requireActivity())
         }
         binding.btLoginContinue.setOnClickListener {
-            navigator.openProfileFragment(null)
+            navigator.openProfileFragment(UserToLoad.CurrentUser)
+        }
+        binding.btLoginLogout.setOnClickListener {
+            loginViewModel.clearCookies()
         }
     }
 
@@ -61,27 +66,34 @@ class LoginFragment : BaseFragment() {
         loginViewModel.tokenStatus.observe(viewLifecycleOwner, ::updateUI)
     }
 
-    private fun updateUI(tokenStatus: TokenStatus) {
-        when (tokenStatus) {
-            TokenStatus.EMPTY -> {
+    private fun updateUI(loginViewStatus: LoginViewStatus) {
+        when (loginViewStatus) {
+            is LoginViewStatus.EmptyToken -> {
                 binding.apply {
                     pbLogin.visibility = View.GONE
                     btLogin.visibility = View.VISIBLE
                     btLoginContinue.visibility = View.GONE
+                    btLoginLogout.visibility = View.GONE
+                    tvLoginUserName.visibility = View.GONE
                 }
             }
-            TokenStatus.LOADED -> {
+            is LoginViewStatus.LoadedToken -> {
                 binding.apply {
                     pbLogin.visibility = View.GONE
                     btLogin.visibility = View.GONE
                     btLoginContinue.visibility = View.VISIBLE
+                    btLoginLogout.visibility = View.VISIBLE
+                    tvLoginUserName.visibility = View.VISIBLE
+                    tvLoginUserName.text =
+                        getString(R.string.login_name_template, loginViewStatus.user.login)
                 }
             }
-            TokenStatus.LOADING -> {
+            is LoginViewStatus.LoadingToken -> {
                 binding.apply {
                     pbLogin.visibility = View.VISIBLE
                     btLoginContinue.visibility = View.GONE
                     btLogin.visibility = View.GONE
+                    btLoginLogout.visibility = View.GONE
                 }
             }
         }

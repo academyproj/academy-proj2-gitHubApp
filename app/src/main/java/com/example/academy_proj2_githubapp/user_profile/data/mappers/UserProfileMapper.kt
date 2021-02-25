@@ -13,7 +13,8 @@ class UserProfileMapper @Inject constructor(private val context: Context) {
 
             val name = it.name ?: it.login
             val company = it.company ?: context.getString(R.string.no_company)
-            val location = it.company ?: context.getString(R.string.no_location)
+            val location = it.location ?: context.getString(R.string.no_location)
+            val bio = it.bio ?: ""
 
             UserInfoModel(
                 id = it.id,
@@ -22,7 +23,15 @@ class UserProfileMapper @Inject constructor(private val context: Context) {
                 avatarUrl = it.avatarUrl,
                 company = company,
                 email = it.email,
-                location = location
+                location = location,
+                bio = bio,
+                followers = it.followers,
+                following = it.following,
+                follow = context.getString(
+                    R.string.login_follow_template,
+                    it.followers,
+                    it.following
+                )
             )
         }.mapError {
             val errorResId = when (it) {

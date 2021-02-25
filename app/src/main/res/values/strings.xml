@@ -10,4 +10,16 @@
     <string name="user_info_not_loaded">Failed to load user info</string>
     <string name="repos_info_not_loaded">Failed to load repos</string>
     <string name="unknown_error">Something went wrong</string>
+    <string name="issues">Issues</string>
+    <string name="contributors">Contributors</string>
+    <string name="issues_count_template">%d Issues</string>
+    <string name="star_count_template">%d star</string>
+    <string name="stars_count_template">%d stars</string>
+    <string name="fork_count_template">%d fork</string>
+    <string name="forks_count_template">%d forks</string>
+    <string name="logout">Logout</string>
+    <string name="login_name_template">Logged in as %s</string>
+    <string name="login_follow_template">%d followers • %d following</string>
+    <string name="useravatar">UserAvatar</string>
+    <string name="open_issue">Open issue</string>
 </resources>

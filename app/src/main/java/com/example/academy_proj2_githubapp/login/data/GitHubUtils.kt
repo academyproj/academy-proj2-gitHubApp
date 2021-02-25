@@ -2,18 +2,18 @@ package com.example.academy_proj2_githubapp.login.data
 
 import android.net.Uri
 import com.example.academy_proj2_githubapp.login.data.models.AccessToken
-import com.example.academy_proj2_githubapp.login.data.models.User
+import com.example.academy_proj2_githubapp.repository.data.models.UserModel
 import javax.inject.Inject
 
 class GitHubUtils @Inject constructor(
     private val loginService: LoginService,
-    private val userService: UserService
+    private val userService: UserService,
 ) {
 
     private companion object {
-        const val clientId = "Iv1.285bc9168541e271"
-        const val clientSecret = "22b361ae6e2b0e23ec3edbb4e39eb89bceedce63"
-        const val redirectUrl = "academy-proj2-githubapp://callback"
+        const val clientId = "81e826e2d9913602fa7a"
+        const val clientSecret = "6229190ecdc9fed61890e17e72d5d2c295408d96"
+        const val redirectUrl = "academyproj2://callback"
         const val scopes = "repo, user"
         const val schema = "https"
         const val host = "github.com"
@@ -43,8 +43,8 @@ class GitHubUtils @Inject constructor(
         return loginService.getAccessToken(clientId, clientSecret, code)
     }
 
-    suspend fun getUser(token: String): User {
-        return userService.getUser(token)
-    }
 
+    suspend fun getUser(): UserModel {
+        return userService.getUser()
+    }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_gray"
+    android:padding="@dimen/rv_item_padding">
+
+    <ImageView
+        android:id="@+id/ivCommentAvatarMigrate"
+        android:layout_width="@dimen/user_item_avatar_size"
+        android:layout_height="@dimen/user_item_avatar_size"
+        android:background="@drawable/avatar_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCommentUserNameMigrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rv_item_sections_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rv_item_name_size"
+        app:layout_constraintBottom_toBottomOf="@id/ivCommentAvatarMigrate"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/ivCommentAvatarMigrate"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/tvCommentBodyMigrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rv_item_sections_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/rv_item_additional_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivCommentAvatarMigrate"
+        tools:text="@tools:sample/lorem" />
+
+    <ImageButton
+        android:id="@+id/ibAddCommentReactionMigrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rv_item_sections_margin"
+        android:background="@color/bg_gray"
+        android:src="@drawable/ic_baseline_add_reaction_24"
+        android:tint="@color/fg_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCommentBodyMigrate" />
+
+    <HorizontalScrollView
+        android:id="@+id/svCommentReactionsMigrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rv_item_sections_margin"
+        app:layout_constraintBottom_toBottomOf="@id/ibAddCommentReactionMigrate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ibAddCommentReactionMigrate"
+        app:layout_constraintTop_toTopOf="@id/ibAddCommentReactionMigrate">
+
+        <LinearLayout
+            android:id="@+id/llCommentReactionsMigrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

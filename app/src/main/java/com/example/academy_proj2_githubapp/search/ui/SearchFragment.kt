@@ -2,15 +2,20 @@ package com.example.academy_proj2_githubapp.search.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -50,15 +55,35 @@ class SearchFragment : BaseFragment() {
         setupListener()
     }
 
+    private val coroutineScope = CoroutineScope(Job())
+
     private fun setupListener() {
-        binding.etSearch.setOnEditorActionListener { v, actionId, _ ->
-            if (v != null && actionId == EditorInfo.IME_ACTION_SEARCH) {
-                binding.etSearch.text?.let {
-                    searchViewModel.searchUsers(it.toString())
+        val watcher = object : TextWatcher {
+            var searchFor = ""
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString().trim()
+                if (searchText == searchFor)
+                    return
+
+                searchFor = searchText
+
+                coroutineScope.launch {
+                    delay(300)
+                    if (searchText != searchFor)
+                        return@launch
+
+                    if(searchText.isNotEmpty()) {
+                        searchViewModel.searchUsers(searchText)
+                    }
                 }
             }
-            false
+
+            override fun afterTextChanged(s: Editable?) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
         }
+        binding.etSearch.addTextChangedListener(watcher)
     }
 
     private fun setupObserver() {

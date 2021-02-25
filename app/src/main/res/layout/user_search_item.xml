@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    style="@style/SelectableItemBackground"
     android:padding="@dimen/rv_item_padding">
 
     <ImageView
         android:id="@+id/ivUserItemAvatar"
         android:layout_width="@dimen/user_item_avatar_size"
         android:layout_height="@dimen/user_item_avatar_size"
-        tools:src="@color/purple_200" />
+        tools:src="@color/purple_200"
+        android:contentDescription="@string/useravatar" />
 
     <TextView
         android:id="@+id/tvUserItemName"

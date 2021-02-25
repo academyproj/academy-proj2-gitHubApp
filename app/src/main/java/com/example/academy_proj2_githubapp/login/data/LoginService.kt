@@ -16,5 +16,4 @@ interface LoginService {
         @Field("client_secret") clientSecret: String,
         @Field("code") code: String,
     ): AccessToken
-
 }

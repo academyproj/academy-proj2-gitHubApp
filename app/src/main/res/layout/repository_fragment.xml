@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <ImageView
+        android:id="@+id/ivRepoUserIcon"
+        android:layout_width="@dimen/repo_small_icon"
+        android:layout_height="@dimen/repo_small_icon"
+        android:layout_margin="@dimen/repo_standard_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRepoUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/repo_standard_margin"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/ivRepoUserIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="UserName" />
+
+    <TextView
+        android:id="@+id/tvRepoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/repo_standard_margin"
+        android:layout_marginTop="@dimen/repo_standard_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/repo_big_text"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivRepoUserIcon"
+        tools:text="Repo Title" />
+
+    <TextView
+        android:id="@+id/tvRepoDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/repo_standard_margin"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRepoName"
+        tools:text="Repo Description" />
+
+    <ImageView
+        android:id="@+id/ivRepoStarIcon"
+        android:layout_width="@dimen/repo_small_icon"
+        android:layout_height="@dimen/repo_small_icon"
+        android:layout_margin="@dimen/repo_standard_margin"
+        android:src="@drawable/ic_baseline_star_border_24_white"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepoDescription" />
+
+    <TextView
+        android:id="@+id/tvRepoStarCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/repo_small_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/repo_small_text"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRepoStarIcon"
+        app:layout_constraintStart_toEndOf="@id/ivRepoStarIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivRepoStarIcon"
+        tools:text="Stars Count" />
+
+    <ImageView
+        android:id="@+id/ivRepoForkIcon"
+        android:layout_width="@dimen/repo_small_icon"
+        android:layout_height="@dimen/repo_small_icon"
+        android:layout_marginStart="@dimen/repo_standard_margin"
+        android:src="@drawable/gk_new_branch_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRepoStarIcon"
+        app:layout_constraintStart_toEndOf="@id/tvRepoStarCount"
+        app:layout_constraintTop_toTopOf="@+id/ivRepoStarIcon" />
+
+    <TextView
+        android:id="@+id/tvRepoForkCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/repo_small_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/repo_small_text"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRepoStarIcon"
+        app:layout_constraintStart_toEndOf="@id/ivRepoForkIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivRepoStarIcon"
+        tools:text="Forks Count" />
+
+    <View
+        android:id="@+id/view"
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/repo_standard_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/ivRepoStarIcon" />
+
+    <LinearLayout
+        android:id="@+id/llIssues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SelectableItemBackground"
+        android:orientation="horizontal"
+        android:padding="@dimen/repo_standard_margin"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/repo_big_icon"
+            android:layout_height="@dimen/repo_big_icon"
+            android:src="@drawable/issues_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/repo_small_margin"
+            android:text="@string/issues"
+            android:textColor="@color/white"
+            android:textSize="@dimen/repo_medium_text" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvRepoIssuesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:textColor="@color/white"
+            tools:text="Issues count" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/llIssues" />
+
+    <LinearLayout
+        android:id="@+id/llContributors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SelectableItemBackground"
+        android:orientation="horizontal"
+        android:padding="@dimen/repo_standard_margin"
+        app:layout_constraintTop_toBottomOf="@+id/llIssues">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/repo_big_icon"
+            android:layout_height="@dimen/repo_big_icon"
+            android:src="@drawable/contributors_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/repo_small_margin"
+            android:text="@string/contributors"
+            android:textColor="@color/white"
+            android:textSize="@dimen/repo_medium_text" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_big_height"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/llContributors" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2">
+
+        <TextView
+            android:id="@+id/tvRepoReadme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/repo_standard_margin"
+            android:textColor="@color/white"
+            tools:text="@tools:sample/lorem/random" />
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pbRepository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_gray"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRepoError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:textSize="@dimen/repo_big_text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Error" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

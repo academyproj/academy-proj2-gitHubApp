@@ -1,8 +1,8 @@
 package com.example.academy_proj2_githubapp
 
 import org.junit.Test
-
-import org.junit.Assert.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +12,12 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+
+        val dateString = "2020-12-24T06:38:42Z"
+
+        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_INSTANT)
+        val formatter = DateTimeFormatter.ofPattern("yyyy MM dd")
+
+        println(date.format(formatter))
     }
 }

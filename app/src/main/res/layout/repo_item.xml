@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llRepoItemContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/SelectableItemBackground"
     android:padding="@dimen/rv_item_padding"
     tools:background="@color/bg_gray">
 
@@ -39,8 +41,7 @@
         android:textSize="@dimen/rv_item_additional_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRepoItemWatchers"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepoItemName"
         tools:text="Created at 12.12.20" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
