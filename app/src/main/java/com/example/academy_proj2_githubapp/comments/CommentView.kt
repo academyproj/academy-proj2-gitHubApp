@@ -45,6 +45,7 @@ class CommentView @JvmOverloads constructor(
     }
 
     fun updateReactions(reactions: HashMap<ReactionType, Int>) {
+        binding.llCommentReactionsMigrate.removeAllViews()
         reactions.keys.forEach { reaction ->
             reactions[reaction]?.let { quantity ->
                 if (quantity > 0) {
@@ -58,7 +59,7 @@ class CommentView @JvmOverloads constructor(
                         )
                         setCompoundDrawablesRelativeWithIntrinsicBounds(reaction.src, 0, 0, 0)
                     }
-                    binding.llCommentReactionsMigrage.addView(view)
+                    binding.llCommentReactionsMigrate.addView(view)
                 }
             }
         }

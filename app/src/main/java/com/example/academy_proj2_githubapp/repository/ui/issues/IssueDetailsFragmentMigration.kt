@@ -109,7 +109,7 @@ class IssueDetailsFragmentMigration : BaseFragment() {
                 is ReactionDialogViewState.Ready -> {
                     binding.pbIssueDetailsMigrationLoading.visibility = View.GONE
                     navigator.openReactionsDialog(it.data) { reaction ->
-                        viewModel.createReaction(reaction)
+                        viewModel.onReactionChosen(reaction)
                     }
                 }
                 is ReactionDialogViewState.Error -> {

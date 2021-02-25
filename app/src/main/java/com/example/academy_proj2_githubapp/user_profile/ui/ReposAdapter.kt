@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.RepoItemBinding
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoModel
-import java.security.acl.Owner
 
 class ReposAdapter(private val callback: (RepoCallback) -> Unit) :
     ListAdapter<UserRepoModel, RepoItemViewHolder>(ReposDiffCallback()) {

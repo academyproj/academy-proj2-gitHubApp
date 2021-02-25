@@ -2,18 +2,13 @@ package com.example.academy_proj2_githubapp.repository.ui.repository
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
-import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.RepositoryFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
-import com.example.academy_proj2_githubapp.repository.ui.contributors.ContributorsFragment
-import com.example.academy_proj2_githubapp.repository.ui.issues.IssuesFragment
 import javax.inject.Inject
 
 class RepositoryFragment : BaseFragment() {
@@ -88,7 +83,7 @@ class RepositoryFragment : BaseFragment() {
     }
 
     private fun updateUI(repoState: RepoState) {
-        when(repoState) {
+        when (repoState) {
             is RepoState.RepoLoading -> {
                 binding.apply {
                     pbRepository.visibility = View.VISIBLE

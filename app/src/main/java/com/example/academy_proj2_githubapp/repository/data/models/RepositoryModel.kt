@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 // TODO clear useless fields
 
-data class RepositoryModel (
+data class RepositoryModel(
     @SerializedName("id")
     val id: Int,
 

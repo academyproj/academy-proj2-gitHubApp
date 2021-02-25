@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel

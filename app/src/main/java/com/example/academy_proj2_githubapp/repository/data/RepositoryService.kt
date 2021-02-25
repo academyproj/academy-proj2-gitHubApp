@@ -4,6 +4,7 @@ import com.example.academy_proj2_githubapp.comments.models.CommentModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionData
 import com.example.academy_proj2_githubapp.repository.data.models.*
 import com.google.gson.annotations.SerializedName
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -43,27 +44,34 @@ interface RepositoryService {
         @Path("number") issueNumber: Int,
     ): Call<IssueDetailsMigrationModel>
 
-    @POST("repos/{owner}/{repo}/issues/comments/{id}/reactions")
+    @POST("repos/{owner}/{repo}/issues/comments/{comment_id}/reactions")
     fun createIssueCommentReaction(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
-        @Path("id") id: Int,
+        @Path("comment_id") commentId: Int,
         @Body content: ReactionContent
-    ) : Call<ReactionData>
+    ): Call<ReactionData>
 
-    @GET("repos/{owner}/{repo}/contributors")
-    fun getRepoContributors(
+    @DELETE("repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}")
+    fun deleteCommentReaction(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
-    ): Call<List<UserModel>>
+        @Path("comment_id") commentId: Int,
+        @Path("reaction_id") reactionId: Int,
+    ): Call<ResponseBody>
 
-    @Headers("Accept: application/vnd.github.squirrel-girl-preview+json")
     @GET("repos/{owner}/{repo}/issues/comments/{id}/reactions")
     fun getCommentReactions(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
         @Path("id") id: Int
     ): Call<List<ReactionData>>
+
+    @GET("repos/{owner}/{repo}/contributors")
+    fun getRepoContributors(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+    ): Call<List<UserModel>>
 }
 
 data class ReactionContent(

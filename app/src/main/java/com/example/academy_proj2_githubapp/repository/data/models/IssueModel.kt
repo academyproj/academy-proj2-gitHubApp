@@ -1,13 +1,10 @@
 package com.example.academy_proj2_githubapp.repository.data.models
 
-import com.example.academy_proj2_githubapp.login.data.models.User
-
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
 
-data class IssueModel (
+data class IssueModel(
     @SerializedName("url")
     @Expose
     val url: String,

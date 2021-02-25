@@ -8,7 +8,6 @@ import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -21,12 +20,19 @@ class RepoModule {
     }
 
     @Provides
-    fun provideRepositoryViewModel(repositoryService: RepositoryService, multithreading: Multithreading, repoToUiMapper: RepoToUiMapper): RepositoryViewModel {
+    fun provideRepositoryViewModel(
+        repositoryService: RepositoryService,
+        multithreading: Multithreading,
+        repoToUiMapper: RepoToUiMapper
+    ): RepositoryViewModel {
         return RepositoryViewModel(repositoryService, multithreading, repoToUiMapper)
     }
 
     @Provides
-    fun provideContributorsViewModel(repositoryService: RepositoryService, multithreading: Multithreading): ContributorsViewModel {
+    fun provideContributorsViewModel(
+        repositoryService: RepositoryService,
+        multithreading: Multithreading
+    ): ContributorsViewModel {
         return ContributorsViewModel(repositoryService, multithreading)
     }
 }

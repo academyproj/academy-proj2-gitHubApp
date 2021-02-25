@@ -1,7 +1,6 @@
 package com.example.academy_proj2_githubapp
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.academy_proj2_githubapp.databinding.NavigationActivityBinding
@@ -22,7 +21,7 @@ class NavigationActivity : AppCompatActivity() {
         setupBinding()
         setupSearchButton()
 
-        if(savedInstanceState?.getBoolean(LOGGED_IN_KEY) != true)
+        if (savedInstanceState?.getBoolean(LOGGED_IN_KEY) != true)
             navigator.openLoginFragment()
     }
 

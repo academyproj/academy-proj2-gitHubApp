@@ -34,6 +34,7 @@ class IssuesFragment : BaseFragment() {
     override val isSearchButtonVisible: Boolean = true
 
     lateinit var binding: IssuesFragmentBinding
+
     @Inject
     lateinit var viewModel: IssuesViewModel
     private lateinit var issuesRVAdapter: IssuesRVAdapter

@@ -1,16 +1,13 @@
 package com.example.academy_proj2_githubapp.repository.ui.issues
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.IssueItemBinding
-import com.example.academy_proj2_githubapp.databinding.UserSearchItemBinding
 import com.example.academy_proj2_githubapp.repository.data.models.IssueModel
 
 class IssuesRVAdapter(private val callback: (IssueCallbackModel) -> Unit) :

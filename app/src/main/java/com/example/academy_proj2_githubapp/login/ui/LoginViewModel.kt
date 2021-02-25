@@ -26,9 +26,6 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     private val gitHubUtils: GitHubUtils,
-    private val userService: UserService,
-    private val loginService: LoginService,
-    private val multithreading: Multithreading,
     private val sharedPreferences: SharedPrefs
 ) : ViewModel() {
 

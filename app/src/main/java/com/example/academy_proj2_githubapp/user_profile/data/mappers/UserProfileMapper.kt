@@ -27,7 +27,11 @@ class UserProfileMapper @Inject constructor(private val context: Context) {
                 bio = bio,
                 followers = it.followers,
                 following = it.following,
-                follow = context.getString(R.string.login_follow_template, it.followers, it.following)
+                follow = context.getString(
+                    R.string.login_follow_template,
+                    it.followers,
+                    it.following
+                )
             )
         }.mapError {
             val errorResId = when (it) {

@@ -1,6 +1,5 @@
 package com.example.academy_proj2_githubapp.repository.ui.issues
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.repository.data.RepositoryService
@@ -12,7 +11,7 @@ import javax.inject.Inject
 class IssuesViewModel @Inject constructor(
     private val repositoryService: RepositoryService,
     private val multithreading: Multithreading,
-): ViewModel() {
+) : ViewModel() {
 
     val viewState = MutableLiveData<IssuesViewState>()
 

@@ -35,6 +35,7 @@ class ContributorsFragment : Fragment() {
     }
 
     lateinit var binding: ContributorsFragmentBinding
+
     @Inject
     lateinit var viewModel: ContributorsViewModel
     private lateinit var contributorsAdapter: ContributorsRVAdapter
@@ -98,7 +99,10 @@ class ContributorsFragment : Fragment() {
     //TODO delete swap to issue details
     private fun test(username: String) {
         activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.flFragmentContainer, UserProfileFragment.newInstance(UserToLoad.CustomUser(username)))
+            ?.replace(
+                R.id.flFragmentContainer,
+                UserProfileFragment.newInstance(UserToLoad.CustomUser(username))
+            )
             ?.addToBackStack(null)?.commit()
     }
 }
