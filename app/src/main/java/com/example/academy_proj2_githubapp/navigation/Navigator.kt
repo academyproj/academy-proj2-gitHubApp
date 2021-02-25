@@ -12,6 +12,7 @@ import com.example.academy_proj2_githubapp.repository.ui.issues.IssueDetailsFrag
 import com.example.academy_proj2_githubapp.repository.ui.issues.IssuesFragment
 import com.example.academy_proj2_githubapp.repository.ui.repository.RepositoryFragment
 import com.example.academy_proj2_githubapp.search.ui.SearchFragment
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
 
 class Navigator(
@@ -25,13 +26,11 @@ class Navigator(
             .commit()
     }
 
-    fun openProfileFragment(userName: String?) {
-        val transaction = fragmentManager.beginTransaction()
-            .replace(containerId, UserProfileFragment.newInstance(userName))
-
-        // Don't add login fragment to BackStack
-        userName?.let { transaction.addToBackStack(null) }
-        transaction.commit()
+    fun openProfileFragment(user: UserToLoad) {
+        fragmentManager.beginTransaction()
+            .replace(containerId, UserProfileFragment.newInstance(user))
+            .addToBackStack(null)
+            .commit()
     }
 
     fun openSearchFragment() {

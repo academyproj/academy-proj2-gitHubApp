@@ -11,16 +11,17 @@ import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.UserProfileFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import javax.inject.Inject
 
-private const val USERNAME_PARAM = "USERNAME_PARAM"
+private const val USER_PARAM = "USER_PARAM"
 
 class UserProfileFragment : BaseFragment() {
 
     companion object {
-        fun newInstance(username: String?): UserProfileFragment {
+        fun newInstance(userToLoad: UserToLoad): UserProfileFragment {
             val args = Bundle().apply {
-                putString(USERNAME_PARAM, username)
+                putSerializable(USER_PARAM, userToLoad)
             }
             return UserProfileFragment().apply {
                 arguments = args
@@ -37,7 +38,7 @@ class UserProfileFragment : BaseFragment() {
     lateinit var userProfileViewModel: UserProfileViewModel
 
     private lateinit var reposAdapter: ReposAdapter
-    private var username: String? = null
+    private var currentUser: UserToLoad? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,7 +48,7 @@ class UserProfileFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            username = it.getString(USERNAME_PARAM)
+            currentUser = it.getSerializable(USER_PARAM) as UserToLoad
         }
     }
 
@@ -64,7 +65,9 @@ class UserProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRv()
         setupObserver()
-        userProfileViewModel.loadUserInfo(username)
+        currentUser?.let {
+            userProfileViewModel.loadUserInfo(it)
+        }
     }
 
     private fun setupRv() {

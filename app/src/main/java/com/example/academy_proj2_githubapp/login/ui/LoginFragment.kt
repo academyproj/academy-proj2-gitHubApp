@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.LoginFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -53,7 +54,7 @@ class LoginFragment : BaseFragment() {
             loginViewModel.startLogin(requireActivity())
         }
         binding.btLoginContinue.setOnClickListener {
-            navigator.openProfileFragment(null)
+            navigator.openProfileFragment(UserToLoad.CurrentUser)
         }
         binding.btLoginLogout.setOnClickListener {
             loginViewModel.clearCookies()

@@ -10,6 +10,7 @@ import com.example.academy_proj2_githubapp.user_profile.data.mappers.UserReposMa
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoErrors
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoModel
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoModel
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import javax.inject.Inject
 
 class UserProfileViewModel @Inject constructor(
@@ -21,18 +22,19 @@ class UserProfileViewModel @Inject constructor(
 
     val viewState = MutableLiveData<UserInfoViewState>()
 
-    fun loadUserInfo(username: String?) {
+    fun loadUserInfo(user: UserToLoad) {
         viewState.value = UserInfoViewState.Loading
 
         val asyncOperation =
             multithreading.async<Result<UserInfoModel, UserInfoErrors>> {
-                val user = if (username.isNullOrEmpty()) {
-                    userInfoService.getCurrentUser()
-                } else {
-                    userInfoService.getUser(username)
+
+                val userInfo = when (user) {
+                    is UserToLoad.CustomUser -> userInfoService.getUser(user.login)
+                    is UserToLoad.CurrentUser -> userInfoService.getCurrentUser()
                 }.execute().body()
                     ?: return@async Result.error(UserInfoErrors.USER_INFO_NOT_LOADED)
-                return@async Result.success(user)
+
+                return@async Result.success(userInfo)
             }
 
         asyncOperation
