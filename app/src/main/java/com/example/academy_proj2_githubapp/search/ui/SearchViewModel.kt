@@ -19,7 +19,7 @@ class SearchViewModel @Inject constructor(
 
     companion object {
         private const val SEARCH_PAGES = 1
-        private const val USERS_PER_PAGE = 70
+        private const val USERS_PER_PAGE = 50
     }
 
     val viewState = MutableLiveData<SearchViewState>()
@@ -40,11 +40,10 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun showResult(result: Result<List<UserFromSearchModel>, String>) {
-        viewState.value = if (result.isError) {
+        viewState.value = if (result.isError)
             SearchViewState.SearchFailed(result.errorResult)
-        } else {
+        else
             SearchViewState.SearchSuccess(result.successResult)
-        }
     }
 
 }
