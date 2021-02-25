@@ -1,12 +1,17 @@
 package com.example.academy_proj2_githubapp
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.academy_proj2_githubapp.databinding.NavigationActivityBinding
 import com.example.academy_proj2_githubapp.navigation.Navigator
 
 class NavigationActivity : AppCompatActivity() {
+
+    private companion object {
+        const val LOGGED_IN_KEY = "LOGGED_IN_KEY"
+    }
 
     val navigator by lazy { Navigator(supportFragmentManager, R.id.flFragmentContainer) }
 
@@ -16,7 +21,14 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupBinding()
         setupSearchButton()
-        navigator.openLoginFragment()
+
+        if(savedInstanceState?.getBoolean(LOGGED_IN_KEY) != true)
+            navigator.openLoginFragment()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(LOGGED_IN_KEY, true)
     }
 
     private fun setupBinding() {
