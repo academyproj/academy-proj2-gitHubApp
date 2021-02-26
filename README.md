@@ -1,17 +1,17 @@
 # academy-proj2-gitHubApp
 
 
-Participants: 
-Dunets Nazar: NazarDunets            https://github.com/NazarDunets
-Buryachenko Olexiy: Alehandrissimus  https://github.com/Alehandrissimus
+Participants: <br />
+Dunets Nazar: NazarDunets            https://github.com/NazarDunets<br />
+/nBuryachenko Olexiy: Alehandrissimus  https://github.com/Alehandrissimus<br />
 
 Developed an application for Github, with the following functionality:
 
-Authorization
-User screen: the screen should have his avatar, name, list of repositories, with the ability to go to project details
-Project screen: the screen should have a list of contributors, readMe, and a list of issues, with the ability to go to details
-Screen issue: author, title, content, list of comments, the ability to add emotion to the comment)
-Search for users, with the ability to open the user profile
+Authorization<br />
+User screen: the screen should have his avatar, name, list of repositories, with the ability to go to project details<br />
+Project screen: the screen should have a list of contributors, readMe, and a list of issues, with the ability to go to details<br />
+Screen issue: author, title, content, list of comments, the ability to add emotion to the comment)<br />
+Search for users, with the ability to open the user profile<br />
 
 The team must have a code review. All changes to the main branch should be made only through the pool request (pull request / merge 
 request) from the feature of the branches.
