@@ -3,7 +3,7 @@
 
 Participants: <br />
 Dunets Nazar: NazarDunets            https://github.com/NazarDunets<br />
-/nBuryachenko Olexiy: Alehandrissimus  https://github.com/Alehandrissimus<br />
+Buryachenko Olexiy: Alehandrissimus  https://github.com/Alehandrissimus<br />
 
 Developed an application for Github, with the following functionality:
 
