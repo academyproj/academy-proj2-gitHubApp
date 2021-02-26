@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.UserSearchItemBinding
-import com.example.academy_proj2_githubapp.repository.data.models.UserModel
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 
 class ContributorsRVAdapter(private val callback: (String) -> Unit) :
-    ListAdapter<UserModel, ContributorsViewHolder>(ContributorsDiffCallback()) {
+    ListAdapter<UserInfoModel, ContributorsViewHolder>(ContributorsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContributorsViewHolder {
         //TODO R.layout contributor search item or not
@@ -32,7 +32,7 @@ class ContributorsViewHolder(itemView: View, private val callback: (String) -> U
 
     private val binding = UserSearchItemBinding.bind(itemView)
 
-    fun bind(user: UserModel) {
+    fun bind(user: UserInfoModel) {
         binding.tvUserItemName.text = user.login
         Glide.with(itemView)
             .load(user.avatarUrl)
@@ -45,17 +45,17 @@ class ContributorsViewHolder(itemView: View, private val callback: (String) -> U
     }
 }
 
-class ContributorsDiffCallback : DiffUtil.ItemCallback<UserModel>() {
+class ContributorsDiffCallback : DiffUtil.ItemCallback<UserInfoModel>() {
     override fun areItemsTheSame(
-        oldItem: UserModel,
-        newItem: UserModel
+        oldItem: UserInfoModel,
+        newItem: UserInfoModel
     ): Boolean {
         return oldItem == newItem
     }
 
     override fun areContentsTheSame(
-        oldItem: UserModel,
-        newItem: UserModel
+        oldItem: UserInfoModel,
+        newItem: UserInfoModel
     ): Boolean {
         return oldItem == newItem
     }

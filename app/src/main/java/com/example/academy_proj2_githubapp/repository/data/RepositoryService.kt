@@ -2,7 +2,10 @@ package com.example.academy_proj2_githubapp.repository.data
 
 import com.example.academy_proj2_githubapp.comments.models.CommentModel
 import com.example.academy_proj2_githubapp.reactions.models.ReactionData
-import com.example.academy_proj2_githubapp.repository.data.models.*
+import com.example.academy_proj2_githubapp.repository.data.models.IssueDetailsMigrationModel
+import com.example.academy_proj2_githubapp.repository.data.models.RepositoryModel
+import com.example.academy_proj2_githubapp.repository.data.models.RepositoryReadmeModel
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.google.gson.annotations.SerializedName
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -27,7 +30,7 @@ interface RepositoryService {
     fun getRepoIssues(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
-    ): Call<List<IssueModel>>
+    ): Call<List<IssueDetailsMigrationModel>>
 
 
     @GET("repos/{owner}/{repo}/issues/{number}/comments")
@@ -71,7 +74,7 @@ interface RepositoryService {
     fun getRepoContributors(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
-    ): Call<List<UserModel>>
+    ): Call<List<UserInfoModel>>
 }
 
 data class ReactionContent(

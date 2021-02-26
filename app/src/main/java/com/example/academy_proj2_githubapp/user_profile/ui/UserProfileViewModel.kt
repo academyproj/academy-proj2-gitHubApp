@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.shared.async.Multithreading
 import com.example.academy_proj2_githubapp.shared.async.Result
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.example.academy_proj2_githubapp.user_profile.data.api.UserInfoService
 import com.example.academy_proj2_githubapp.user_profile.data.mappers.UserProfileMapper
 import com.example.academy_proj2_githubapp.user_profile.data.mappers.UserReposMapper
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoErrors
-import com.example.academy_proj2_githubapp.user_profile.data.models.UserInfoModel
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserRepoModel
 import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 import javax.inject.Inject

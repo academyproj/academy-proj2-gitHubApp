@@ -7,7 +7,7 @@ import android.webkit.CookieManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.login.data.GitHubUtils
-import com.example.academy_proj2_githubapp.repository.data.models.UserModel
+import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -42,8 +42,6 @@ class LoginViewModel @Inject constructor(
             val response = gitHubUtils.getAccessToken(code)
             val token = "${response.tokenType} ${response.accessToken}"
             sharedPreferences.token = token
-
-            Log.d("TAG", "token ${sharedPreferences.token}")
             loadUser()
         }
     }
@@ -51,9 +49,13 @@ class LoginViewModel @Inject constructor(
     private fun loadUser() {
         tokenStatus.postValue(LoginViewStatus.LoadingToken)
         GlobalScope.launch {
-            val user = gitHubUtils.getUser()
-            tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
-            sharedPreferences.userLogin = user.login
+            try {
+                val user = gitHubUtils.getUser()
+                tokenStatus.postValue(LoginViewStatus.LoadedToken(user))
+                sharedPreferences.userLogin = user.login
+            } catch(e: Exception){
+                clearCookies()
+            }
         }
     }
 
@@ -74,5 +76,5 @@ class LoginViewModel @Inject constructor(
 sealed class LoginViewStatus {
     object EmptyToken : LoginViewStatus()
     object LoadingToken : LoginViewStatus()
-    data class LoadedToken(val user: UserModel) : LoginViewStatus()
+    data class LoadedToken(val user: UserInfoModel) : LoginViewStatus()
 }
