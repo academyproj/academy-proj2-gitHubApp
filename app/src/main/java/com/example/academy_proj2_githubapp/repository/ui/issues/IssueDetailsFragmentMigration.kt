@@ -99,7 +99,6 @@ class IssueDetailsFragmentMigration : BaseFragment() {
             is IssueDetailsMigrationViewState.Error -> {
                 binding.pbIssueDetailsMigrationLoading.visibility = View.GONE
             }
-            // TODO do smth on error
         }
     }
 
@@ -118,7 +117,6 @@ class IssueDetailsFragmentMigration : BaseFragment() {
                 is ReactionDialogViewState.Loading -> {
                     binding.pbIssueDetailsMigrationLoading.visibility = View.VISIBLE
                 }
-                // TODO do smth on error
             }
         }
     }
