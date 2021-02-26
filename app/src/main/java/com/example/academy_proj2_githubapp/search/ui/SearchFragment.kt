@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
 import com.example.academy_proj2_githubapp.databinding.SearchFragmentBinding
 import com.example.academy_proj2_githubapp.navigation.BaseFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -59,6 +56,11 @@ class SearchFragment : BaseFragment() {
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        coroutineScope.coroutineContext.cancel()
     }
 
     private val coroutineScope = CoroutineScope(Job())

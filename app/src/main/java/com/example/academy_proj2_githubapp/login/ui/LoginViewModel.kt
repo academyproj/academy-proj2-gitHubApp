@@ -9,10 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.example.academy_proj2_githubapp.login.data.GitHubUtils
 import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
 import com.example.academy_proj2_githubapp.shared.preferences.SharedPrefs
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
@@ -70,6 +67,10 @@ class LoginViewModel @Inject constructor(
 
         CookieManager.getInstance().flush()
         tokenStatus.postValue(LoginViewStatus.EmptyToken)
+    }
+
+    fun destroy() {
+        coroutineScope.coroutineContext.cancel()
     }
 }
 

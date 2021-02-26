@@ -98,4 +98,9 @@ class LoginFragment : BaseFragment() {
             }
         }
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        loginViewModel.destroy()
+    }
 }
