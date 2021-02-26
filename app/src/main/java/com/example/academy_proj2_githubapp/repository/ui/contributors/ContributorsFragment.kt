@@ -6,17 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy_proj2_githubapp.AppApplication
-import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.ContributorsFragmentBinding
-import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
-import com.example.academy_proj2_githubapp.user_profile.ui.UserProfileFragment
+import com.example.academy_proj2_githubapp.navigation.BaseFragment
 import javax.inject.Inject
 
-class ContributorsFragment : Fragment() {
+class ContributorsFragment : BaseFragment() {
 
     companion object {
         private const val KEY_OWNER = "KEY_OWNER"
@@ -39,6 +36,8 @@ class ContributorsFragment : Fragment() {
     @Inject
     lateinit var viewModel: ContributorsViewModel
     private lateinit var contributorsAdapter: ContributorsRVAdapter
+
+    override val isSearchButtonVisible: Boolean = true
 
     private var repo: String = ""
     private var owner: String = ""
@@ -74,7 +73,7 @@ class ContributorsFragment : Fragment() {
     }
 
     private fun setupRv() {
-        contributorsAdapter = ContributorsRVAdapter(::test)
+        contributorsAdapter = ContributorsRVAdapter(navigator::openProfileFragment)
         binding.rvContributorsResults.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
@@ -96,16 +95,5 @@ class ContributorsFragment : Fragment() {
             }
 
         }
-    }
-
-
-    //TODO delete swap to issue details
-    private fun test(username: String) {
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(
-                R.id.flFragmentContainer,
-                UserProfileFragment.newInstance(UserToLoad.CustomUser(username))
-            )
-            ?.addToBackStack(null)?.commit()
     }
 }

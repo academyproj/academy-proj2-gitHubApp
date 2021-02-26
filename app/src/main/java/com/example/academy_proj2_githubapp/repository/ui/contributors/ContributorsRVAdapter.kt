@@ -10,12 +10,12 @@ import com.bumptech.glide.Glide
 import com.example.academy_proj2_githubapp.R
 import com.example.academy_proj2_githubapp.databinding.UserSearchItemBinding
 import com.example.academy_proj2_githubapp.shared.models.UserInfoModel
+import com.example.academy_proj2_githubapp.user_profile.data.models.UserToLoad
 
-class ContributorsRVAdapter(private val callback: (String) -> Unit) :
+class ContributorsRVAdapter(private val callback: (UserToLoad) -> Unit) :
     ListAdapter<UserInfoModel, ContributorsViewHolder>(ContributorsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContributorsViewHolder {
-        //TODO R.layout contributor search item or not
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.user_search_item, parent, false)
 
@@ -27,7 +27,7 @@ class ContributorsRVAdapter(private val callback: (String) -> Unit) :
     }
 }
 
-class ContributorsViewHolder(itemView: View, private val callback: (String) -> Unit) :
+class ContributorsViewHolder(itemView: View, private val callback: (UserToLoad) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
 
     private val binding = UserSearchItemBinding.bind(itemView)
@@ -40,7 +40,11 @@ class ContributorsViewHolder(itemView: View, private val callback: (String) -> U
             .into(binding.ivUserItemAvatar)
 
         binding.root.setOnClickListener {
-            callback(user.login)
+            callback(
+                UserToLoad.CustomUser(
+                    user.login
+                )
+            )
         }
     }
 }
